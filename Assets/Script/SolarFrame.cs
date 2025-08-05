@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class SolarFrame : MonoBehaviour
+public class SolarFrame : MonoBehaviour,IPowerDataProvider
 {
     [Header("Raycast Settings")]
     public LayerMask slotLayerMask = -1;
@@ -13,6 +13,11 @@ public class SolarFrame : MonoBehaviour
     private void Awake()
     {
         InitializeFrame();
+    }
+    public string GetPowerDisplayText()
+    {
+        float netPower = GetNetPowerOutput();
+        return $"{netPower:F1} W";
     }
 
     private void InitializeFrame()

@@ -87,12 +87,12 @@ public class InteractiveObject : MonoBehaviour
                 canvasGroup.alpha = 1f;
             }
         }
-        var dividerBox = previewInstance.GetComponent<DividerBox>();
-        if (dividerBox != null)
-        {
-            dividerBox.enabled = false;
-            dividerBox.enabled = true;
-        }
+        //var dividerBox = previewInstance.GetComponent<DividerBox>();
+        //if (dividerBox != null)
+        //{
+        //    dividerBox.enabled = false;
+        //    dividerBox.enabled = true;
+        //}
 
         previewInstance = null;
     }

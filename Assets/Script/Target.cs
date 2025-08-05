@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Target : MonoBehaviour
+public class Target : MonoBehaviour,IPowerDataProvider
 {
     public ItemData itemData;
     public Sprite spriteOn;
@@ -13,6 +13,11 @@ public class Target : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         UpdateVisuals();
+    }
+    public string GetPowerDisplayText()
+    {
+        if (itemData == null) return "";
+        return $"{itemData.powerRequirement:F1} W";
     }
 
     public void UpdatePower(float power)

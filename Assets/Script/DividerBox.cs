@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class DividerBox : MonoBehaviour
+public class DividerBox : MonoBehaviour, IPowerDataProvider
 {
     public ItemData itemData;
 
@@ -17,11 +15,9 @@ public class DividerBox : MonoBehaviour
     private float totalPowerInput = 0f;
     private bool isUpdatingUI = false;
 
-    private CanvasFollower[] canvasFollowers;
 
     void Start()
     {
-        SetupCanvasFollowers();
         EnsureInputFieldsAreChildren();
 
         if (valueInput1 != null && valueInput2 != null)
@@ -36,21 +32,11 @@ public class DividerBox : MonoBehaviour
 
         ForceUpdateDistribution();
     }
-    private void SetupCanvasFollowers()
+    public string GetPowerDisplayText()
     {
-        Canvas[] canvases = GetComponentsInChildren<Canvas>();
-        canvasFollowers = new CanvasFollower[canvases.Length];
-
-        for (int i = 0; i < canvases.Length; i++)
-        {
-            CanvasFollower follower = canvases[i].GetComponent<CanvasFollower>();
-            if (follower == null)
-            {
-                follower = canvases[i].gameObject.AddComponent<CanvasFollower>();
-            }
-            canvasFollowers[i] = follower;
-        }
+        return $"{totalPowerInput:F1} W";
     }
+
     private void EnsureInputFieldsAreChildren()
     {
         if (valueInput1 != null && !IsChildOfThis(valueInput1.transform))
@@ -82,22 +68,9 @@ public class DividerBox : MonoBehaviour
         if (transform.position != lastPosition)
         {
             lastPosition = transform.position;
-            NotifyCanvasFollowers();
         }
     }
-    private void NotifyCanvasFollowers()
-    {
-        if (canvasFollowers != null)
-        {
-            foreach (var follower in canvasFollowers)
-            {
-                if (follower != null)
-                {
-                    follower.OnParentMoved();
-                }
-            }
-        }
-    }
+   
 
     private void OnValueChanged(TMP_InputField activeInput, TMP_InputField otherInput, string newValue)
     {

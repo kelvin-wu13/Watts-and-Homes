@@ -1,22 +1,25 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MapManager : MonoBehaviour
 {
     public GameObject mainPanel;
     public GameObject backgroundBlocker;
 
+    public void OnClosePanel(InputAction.CallbackContext context)
+    {
+        if (context.performed && mainPanel != null && mainPanel.activeInHierarchy)
+        {
+            HidePanel();
+        }
+    }
+
     private void Start()
     {
-        if (mainPanel == null)
-        {
-            mainPanel.SetActive(false);
-        }
-        if (backgroundBlocker != null)
-        {
-            backgroundBlocker.SetActive(false);
-        }
+        if (mainPanel != null) { mainPanel.SetActive(false); }
+        if (backgroundBlocker != null) { backgroundBlocker.SetActive(false); }
     }
 
     private void Update()
@@ -43,5 +46,10 @@ public class MapManager : MonoBehaviour
             mainPanel.SetActive(false);
             backgroundBlocker.SetActive(false);
         }
+    }
+
+    void PlayNow()
+    {
+        SceneManager.LoadScene("Gameplay1");
     }
 }

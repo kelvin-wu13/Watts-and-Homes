@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombinerBox : MonoBehaviour
+public class CombinerBox : MonoBehaviour, IPowerDataProvider
 {
     [Header("Item Configuration")]
     public ItemData itemData;
@@ -37,6 +37,10 @@ public class CombinerBox : MonoBehaviour
         ValidateItemData();
         InitializeConnectionPoints();
         UpdatePowerDistribution();
+    }
+    public string GetPowerDisplayText()
+    {
+        return $"In: {totalInputPower:F1}";
     }
 
     private void ValidateItemData()
@@ -128,7 +132,6 @@ public class CombinerBox : MonoBehaviour
             if (cableComponent == null) continue;
 
             ConnectionPoint sourceConnectionPoint = FindOtherConnectionPoint(cable, inputPoint);
-            Debug.Log("Mencari sumber daya... Ditemukan titik ujung lain: " + (sourceConnectionPoint != null ? sourceConnectionPoint.gameObject.name : "TIDAK DITEMUKAN (NULL)"));
             
             if (sourceConnectionPoint != null)
             {
@@ -353,7 +356,6 @@ public class CombinerBox : MonoBehaviour
         debugStringBuilder?.Clear();
     }
 
-    [System.Obsolete("Use GetInputConnectionPoint() instead")]
     public List<ConnectionPoint> GetInputConnectionPoints()
     {
         List<ConnectionPoint> points = new List<ConnectionPoint>();
@@ -362,7 +364,6 @@ public class CombinerBox : MonoBehaviour
         return points;
     }
 
-    [System.Obsolete("Use GetOutputConnectionPoint() instead")]
     public List<ConnectionPoint> GetOutputConnectionPoints()
     {
         List<ConnectionPoint> points = new List<ConnectionPoint>();
