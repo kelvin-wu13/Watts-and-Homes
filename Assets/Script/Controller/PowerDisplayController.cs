@@ -1,8 +1,6 @@
-// PowerDisplayController.cs
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(IPowerDataProvider))]
 public class PowerDisplayController : MonoBehaviour
 {
     public TextMeshProUGUI displayText;

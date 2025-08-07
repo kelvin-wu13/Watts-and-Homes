@@ -140,34 +140,34 @@ public class CableInteractable : MonoBehaviour
     }
     private void ResetConnectedTargetsPower()
     {
-        if (point1 != null && point1.parentItem is Target)
-        {
-            Target target = (Target)point1.parentItem;
-            target.ResetPower();
-        }
-        else if (point1 != null && point1.parentItem is CombinerBox)
-        {
-            CombinerBox combiner = (CombinerBox)point1.parentItem;
-            combiner.ResetConnectedTargetsPower();
-        }
-        else if (point1 != null && point1.parentItem is DividerBox)
-        {
-            ((DividerBox)point1.parentItem).ForceUpdateDistribution();
-        }
+    //    if (point1 != null && point1.parentItem is Target)
+    //    {
+    //        Target target = (Target)point1.parentItem;
+    //        target.ResetPower();
+    //    }
+    //    else if (point1 != null && point1.parentItem is CombinerBox)
+    //    {
+    //        CombinerBox combiner = (CombinerBox)point1.parentItem;
+    //        combiner.ResetConnectedTargetsPower();
+    //    }
+    //    else if (point1 != null && point1.parentItem is DividerBox)
+    //    {
+    //        ((DividerBox)point1.parentItem).ForceUpdateDistribution();
+    //    }
 
-        if (point2 != null && point2.parentItem is Target)
-        {
-            Target target = (Target)point2.parentItem;
-            target.ResetPower();
-        }
-        else if (point2 != null && point2.parentItem is CombinerBox)
-        {
-            CombinerBox combiner = (CombinerBox)point2.parentItem;
-            combiner.ResetConnectedTargetsPower();
-        }
-        else if (point2 != null && point2.parentItem is DividerBox)
-        {
-            ((DividerBox)point2.parentItem).ForceUpdateDistribution();
-        }
+    //    if (point2 != null && point2.parentItem is Target)
+    //    {
+    //        Target target = (Target)point2.parentItem;
+    //        target.ResetPower();
+    //    }
+    //    else if (point2 != null && point2.parentItem is CombinerBox)
+    //    {
+    //        CombinerBox combiner = (CombinerBox)point2.parentItem;
+    //        combiner.ResetConnectedTargetsPower();
+    //    }
+    //    else if (point2 != null && point2.parentItem is DividerBox)
+    //    {
+    //        ((DividerBox)point2.parentItem).ForceUpdateDistribution();
+    //    }
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class PowerCellSlot : MonoBehaviour
 {
@@ -58,6 +58,8 @@ public class PowerCellSlot : MonoBehaviour
         isOccupied = true;
 
         powerCell.transform.position = transform.position;
+
+        powerCell.transform.SetParent(this.transform);
 
         SetVisualState(SlotState.Occupied);
         parentFrame.OnPowerCellPlaced();

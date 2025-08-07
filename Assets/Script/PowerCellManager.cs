@@ -52,8 +52,16 @@ public class PowerCellManager : MonoBehaviour
 
     private void OnStartDrag()
     {
+        transform.SetParent(null);
+
         originalPosition = transform.position;
         wasInSlot = currentSlot != null;
+
+        PowerCell powerCell = GetComponent<PowerCell>();
+        if (powerCell != null)
+        {
+            powerCell.SetInSlot(false);
+        }
 
         ConnectionPoint cp = GetComponent<ConnectionPoint>();
         if (cp != null)
@@ -64,6 +72,7 @@ public class PowerCellManager : MonoBehaviour
         if (currentSlot != null)
         {
             currentSlot.RemovePowerCell();
+            currentSlot = null;
         }
     }
 
@@ -91,10 +100,24 @@ public class PowerCellManager : MonoBehaviour
 
         if (placed)
         {
+            PowerCell powerCell = GetComponent<PowerCell>();
+            if (powerCell != null)
+            {
+                powerCell.SetInSlot(true);
+            }
+
             ConnectionPoint cp = GetComponent<ConnectionPoint>();
             if (cp != null)
             {
                 cp.enabled = false;
+            }
+        }
+        else
+        {
+            PowerCell powercell = GetComponent<PowerCell>();
+            if (powercell != null)
+            {
+                powercell.SetInSlot(false);
             }
         }
     }
@@ -127,6 +150,12 @@ public class PowerCellManager : MonoBehaviour
     public void SetSlot(PowerCellSlot slot)
     {
         currentSlot = slot;
+
+        PowerCell powerCell = GetComponent<PowerCell>();
+        if (powerCell != null)
+        {
+            powerCell.SetInSlot(slot != null);
+        }
     }
 
     public PowerCellSlot GetCurrentSlot()

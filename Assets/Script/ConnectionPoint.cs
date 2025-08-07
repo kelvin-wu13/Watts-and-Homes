@@ -42,7 +42,7 @@ public class ConnectionPoint : MonoBehaviour
             parentItem = GetComponentInParent<DividerBox>();
         }
 
-        if (parentItem is CombinerBox)
+        if (parentItem is CombinerBox || parentItem is Target)
         {
             allowMultipleConnections = true;
             maxConnections = 10;

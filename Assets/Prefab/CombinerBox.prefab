@@ -170,12 +170,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7434173207075217431, guid: 4210d1be0c8566943b9968cbcac61a23, type: 3}
+  m_Sprite: {fileID: -7303922588418554379, guid: a41bb3ff30cff754b9d5c3a37d6fa1ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.05, y: 2.52}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -220,7 +220,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.05, y: 2.52}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 3.05, y: 2.52}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930ed515b6dcbc84492b5113ecf0525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverSprite: {fileID: 8262274265743565358, guid: 4de16560a315ec947b5dae0071aa6344, type: 3}
+  hoverSprite: {fileID: -4649966053106138068, guid: a41bb3ff30cff754b9d5c3a37d6fa1ae, type: 3}
 --- !u!114 &6705308974557245332
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,9 +3,10 @@ using UnityEngine;
 public class PowerCell : MonoBehaviour, IPowerDataProvider
 {
     public ItemData itemData;
+    private bool isInSlot = false;
     public string GetPowerDisplayText()
     {
-        if (itemData == null) return "";
+        if (itemData == null || isInSlot) return "";
 
         switch (itemData.itemType)
         {
@@ -16,6 +17,10 @@ public class PowerCell : MonoBehaviour, IPowerDataProvider
             default:
                 return "";
         }
+    }
+    public void SetInSlot(bool inSlot)
+    {
+        isInSlot = inSlot;
     }
 
     private void OnDestroy()

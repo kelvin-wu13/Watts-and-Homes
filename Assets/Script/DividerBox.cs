@@ -15,6 +15,8 @@ public class DividerBox : MonoBehaviour, IPowerDataProvider
     private float totalPowerInput = 0f;
     private bool isUpdatingUI = false;
 
+    private float distributionRatio1 = 0.5f;
+
 
     void Start()
     {
@@ -30,7 +32,7 @@ public class DividerBox : MonoBehaviour, IPowerDataProvider
         if (outputPoint1 != null) outputPoint1.SetConnectionLimits(false, 1);
         if (outputPoint2 != null) outputPoint2.SetConnectionLimits(false, 1);
 
-        ForceUpdateDistribution();
+        UpdateUIFields(0.5f);
     }
     public string GetPowerDisplayText()
     {
@@ -77,37 +79,55 @@ public class DividerBox : MonoBehaviour, IPowerDataProvider
         if (isUpdatingUI) return;
 
         UpdateTotalInputPower();
+        if (totalPowerInput <= 0)
+        {
+            UpdateUIFields(0.5f);
+            return;
+        }
 
         float.TryParse(newValue, out float activeValue);
         activeValue = Mathf.Clamp(activeValue, 0, totalPowerInput);
 
-        float otherValue = totalPowerInput - activeValue;
+        if (activeInput == valueInput1)
+        {
+            distributionRatio1 = activeValue / totalPowerInput;
+        }
+        else
+        {
+            distributionRatio1 = (totalPowerInput - activeValue) / totalPowerInput;
+        }
 
-        isUpdatingUI = true;
-        activeInput.text = activeValue.ToString("F1");
-        otherInput.text = otherValue.ToString("F1");
-        isUpdatingUI = false;
-
-        float finalPower1 = float.Parse(valueInput1.text);
-        float finalPower2 = float.Parse(valueInput2.text);
-
-        DistributePowerToOutput(outputPoint1, finalPower1);
-        DistributePowerToOutput(outputPoint2, finalPower2);
+        UpdateUIFields(distributionRatio1);
     }
 
     public void ForceUpdateDistribution()
     {
         UpdateTotalInputPower();
 
-        float halfPower = totalPowerInput / 2f;
+        float powerForOutput1 = totalPowerInput * distributionRatio1;
+        float powerForOutput2 = totalPowerInput * (1.0f - distributionRatio1);
 
         isUpdatingUI = true;
-        if (valueInput1 != null) valueInput1.text = halfPower.ToString("F1");
-        if (valueInput2 != null) valueInput2.text = halfPower.ToString("F1");
+        if (valueInput1 != null) valueInput1.text = powerForOutput1.ToString("F1");
+        if (valueInput2 != null) valueInput2.text = powerForOutput2.ToString("F1");
         isUpdatingUI = false;
 
-        DistributePowerToOutput(outputPoint1, halfPower);
-        DistributePowerToOutput(outputPoint2, halfPower);
+
+        DistributePowerToOutput(outputPoint1, powerForOutput1);
+        DistributePowerToOutput(outputPoint2, powerForOutput2);
+    }
+    private void UpdateUIFields(float ratio1)
+    {
+        distributionRatio1 = Mathf.Clamp01(ratio1);
+        float otherRatio = 1.0f - distributionRatio1;
+
+        float value1 = totalPowerInput * distributionRatio1;
+        float value2 = totalPowerInput * otherRatio;
+
+        isUpdatingUI = true;
+        if (valueInput1 != null) valueInput1.text = value1.ToString("F1");
+        if (valueInput2 != null) valueInput2.text = value2.ToString("F1");
+        isUpdatingUI = false;
     }
     private void UpdateTotalInputPower()
     {

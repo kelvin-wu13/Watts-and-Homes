@@ -8,6 +8,9 @@ public class Target : MonoBehaviour,IPowerDataProvider
 
     private SpriteRenderer spriteRenderer;
     private float powerReceived = 0f;
+    public bool IsPowered { get; private set; }
+
+    public float PowerReceived => powerReceived;
 
     private void Start()
     {
@@ -22,7 +25,7 @@ public class Target : MonoBehaviour,IPowerDataProvider
 
     public void UpdatePower(float power)
     {
-        powerReceived = power;
+        powerReceived += power;
         UpdateVisuals();
     }
 
@@ -37,10 +40,12 @@ public class Target : MonoBehaviour,IPowerDataProvider
         if (powerReceived >= itemData.powerRequirement && itemData.powerRequirement > 0)
         {
             spriteRenderer.sprite = spriteOn;
+            IsPowered = true;
         }
         else
         {
             spriteRenderer.sprite = spriteOff;
+            IsPowered = false;
         }
     }
 
