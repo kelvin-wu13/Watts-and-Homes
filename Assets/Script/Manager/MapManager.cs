@@ -1,55 +1,71 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
+using TMPro;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject mainPanel;
-    public GameObject backgroundBlocker;
+    public static MapManager Instance { get; private set; }
 
-    public void OnClosePanel(InputAction.CallbackContext context)
+    public GameObject levelPopupPanel;
+    public GameObject blockerPanel;
+    public TextMeshProUGUI levelTitleText;
+    public Transform popupObjectiveContainer;
+    public GameObject objectiveItemPrefab;
+
+    public Sprite completedSprite;
+    public Sprite incompleteSprite;
+
+    private HouseController selectedHouse;
+
+    private void Awake()
     {
-        if (context.performed && mainPanel != null && mainPanel.activeInHierarchy)
-        {
-            HidePanel();
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     private void Start()
     {
-        if (mainPanel != null) { mainPanel.SetActive(false); }
-        if (backgroundBlocker != null) { backgroundBlocker.SetActive(false); }
+        levelPopupPanel.SetActive(false);
+        blockerPanel.SetActive(false);
     }
 
-    private void Update()
+    public void ShowLevelPopup(HouseController house)
     {
-        if (mainPanel != null && mainPanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        selectedHouse = house;
+        levelTitleText.text = $"Level {house.levelData.levelIndex + 1}";
+
+        foreach (Transform child in popupObjectiveContainer) Destroy(child.gameObject);
+        int stars = GameProgress.GetStars(house.levelData.levelIndex);
+
+        for (int i = 0; i < house.levelData.objectiveDescriptions.Count; i++)
         {
-            HidePanel();
+            GameObject itemUI_GO = Instantiate(objectiveItemPrefab, popupObjectiveContainer);
+            ObjectiveItemUI uiController = itemUI_GO.GetComponent<ObjectiveItemUI>();
+            if (uiController != null)
+            {
+                uiController.objectiveText.text = house.levelData.objectiveDescriptions[i];
+                bool isComplete = i < stars;
+                uiController.statusIcon.sprite = isComplete ? completedSprite : incompleteSprite;
+            }
         }
+
+        levelPopupPanel.SetActive(true);
+        blockerPanel.SetActive(true);
     }
 
-    public void ShowPanel()
+    public void CloseLevelPopup()
     {
-        if (mainPanel != null && backgroundBlocker != null)
+        levelPopupPanel.SetActive(false);
+        blockerPanel.SetActive(false);
+        selectedHouse = null;
+    }
+
+    public void OnClick_PlayLevel()
+    {
+        if (selectedHouse != null)
         {
-            backgroundBlocker.SetActive(true);
-            mainPanel.SetActive(true);
+            SceneManager.LoadScene(selectedHouse.levelData.sceneNameToLoad);
         }
-    }
-
-    public void HidePanel()
-    {
-        if (mainPanel != null && backgroundBlocker != null)
-        {
-            mainPanel.SetActive(false);
-            backgroundBlocker.SetActive(false);
-        }
-    }
-
-    void PlayNow()
-    {
-        SceneManager.LoadScene("Gameplay1");
     }
 }

@@ -8,6 +8,8 @@ public class ObjectiveManager : MonoBehaviour
 {
     public static ObjectiveManager Instance { get; private set; }
 
+    public int currentLevelIndex;
+
     public List<Objective> objectives = new List<Objective>();
 
     [SerializeField] private GameObject objectivePanel;
@@ -17,7 +19,7 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] private Sprite incompleteSprite;
     [SerializeField] private Sprite completedSprite;
 
-    private bool allObjectivesCompleted = false;
+    private bool hasChecked = false;
 
     private void Awake()
     {
@@ -65,7 +67,8 @@ public class ObjectiveManager : MonoBehaviour
 
     public void CheckAllObjectives()
     {
-        if (allObjectivesCompleted) return;
+        if (hasChecked) return;
+        hasChecked = true;
 
         foreach (var objective in objectives)
         {
@@ -73,15 +76,28 @@ public class ObjectiveManager : MonoBehaviour
         }
 
         bool allComplete = true;
+        int starsEarned = 0;
+
         foreach (var objective in objectives)
         {
             UpdateSingleObjectiveUI(objective);
-            if (!objective.IsComplete)
+            if (objective.IsComplete)
+            {
+                starsEarned++;
+            }
+            else
             {
                 allComplete = false;
             }
         }
-        UIManager.Instance.ShowResultPanel(true, objectives);
+
+        GameProgress.SaveStars(currentLevelIndex, starsEarned);
+        GameProgress.UnlockNextLevel(currentLevelIndex);
+
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ShowResultPanel(allComplete, objectives);
+        }
     }
 
     private void UpdateSingleObjectiveUI(Objective objective)
