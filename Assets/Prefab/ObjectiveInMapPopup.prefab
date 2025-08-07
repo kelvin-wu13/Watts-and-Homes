@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 634719000787955410}
   - component: {fileID: 5594831583655761770}
   m_Layer: 5
-  m_Name: ObjectiveInPopup
+  m_Name: ObjectiveInMapPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -479.46777, w: 0}
+  m_margin: {x: 0, y: 0, z: -1504.3171, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

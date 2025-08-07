@@ -137,7 +137,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 726
+        width: 3840
         height: 2160
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,54 +145,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fedc19f5861d49c20800000000000000
-      internalID: 3212422680432201199
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WH_Map_Layer_Depan_1
-      rect:
-        serializedVersion: 2
-        x: 711
-        y: 0
-        width: 100
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d1970661544620230800000000000000
-      internalID: 3603552899740760349
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WH_Map_Layer_Depan_2
-      rect:
-        serializedVersion: 2
-        x: 3032
-        y: 0
-        width: 808
-        height: 2160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: daa55d5ba875bb3e0800000000000000
-      internalID: -2036938153187255635
+      spriteID: 4015be957548f1f47bdfae3abdf3c0dc
+      internalID: 1514381483
       vertices: []
       indices: 
       edges: []
@@ -201,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 33205d4928c908242b17345c7408228e
     internalID: 0
     vertices: []
     indices: 
@@ -209,8 +165,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":3840.0,"y":2160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      WH_Map_Layer_Depan_0: 1514381483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
