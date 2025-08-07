@@ -260,7 +260,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WH_MAP_house_locked_0: 3917128954425941864
+      WH_MAP_house_locked_1: -1089087998100068174
+      WH_MAP_house_locked_2: -7619359579282446666
+      WH_MAP_house_locked_3: 2115332221427574331
+      WH_MAP_house_locked_4: -8812252653180035348
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
