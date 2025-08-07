@@ -260,7 +260,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WH_House_2_0: -8621093834288023190
+      WH_House_2_1: 3024818599404610663
+      WH_House_2_2: -1365335409816406060
+      WH_House_2_3: -4287897023439996616
+      WH_House_2_4: 7178290827762903420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

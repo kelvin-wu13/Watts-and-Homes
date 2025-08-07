@@ -260,7 +260,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WH_MAP_highlight_0: -2075297890132547784
+      WH_MAP_highlight_1: -2531925815896197535
+      WH_MAP_highlight_2: 8140924718065906983
+      WH_MAP_highlight_3: -6826200116336960113
+      WH_MAP_highlight_4: -8466110978818812913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
