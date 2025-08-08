@@ -1,91 +1,57 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using TMPro;
-//using UnityEngine;
-//using UnityEngine.Events;
-//using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
-//public class DialogueManager : MonoBehaviour
-//{
-//    [SerializeField] private GameObject dialoguePanel;
-//    public static DialogueManager Instance;
+public class DialogueManager : MonoBehaviour
+{
+    public static DialogueManager Instance { get; private set; }
 
-//    public Image characterIcon;
-//    public TextMeshProUGUI characterName;
-//    public TextMeshProUGUI dialogueArea;
 
-//    private Queue<DialogueLine> lines = new Queue<DialogueLine>();
+    public GameObject dialoguePanel;
+    public Image characterIconImage;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
 
-//    public bool isDialogueActive = false;
-//    public float isTypingSpeed = 0.2f;
+    private Queue<DialogueLine> linesQueue;
 
-//    public UnityEvent OnDialogueFinished;
+    private void Awake()
+    {
+        if (Instance == null) { Instance = this; }
+        else { Destroy(gameObject); }
 
-//    private void Awake()
-//    {
-//        if (Instance == null)
-//            Instance = this;
-//    }
+        linesQueue = new Queue<DialogueLine>(); ;
+    }
 
-//    private void Update()
-//    {
-//        if (isDialogueActive && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+    public void StartDialogue(List<DialogueLine> lines)
+    {
+        linesQueue.Clear();
+        foreach (DialogueLine line in lines)
+        {
+            linesQueue.Enqueue(line);
+        }
 
-//        {
-//            DisplayNextDialogueLine();
-//        }
-//    }
+        dialoguePanel.SetActive(true);
+        DisplayNextLine();
+    }
 
-//    public void StartDialogue(Dialogue dialogue)
-//    {
-//        Time.timeScale = 0f;
-//        isDialogueActive = true;
+    public void DisplayNextLine()
+    {
+        if (linesQueue.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
 
-//        if (dialoguePanel != null)
-//            dialoguePanel.SetActive(true);
+        DialogueLine currentLine = linesQueue.Dequeue();
 
-//        lines.Clear();
-//        foreach (DialogueLine line in dialogue.dialogueLines)
-//            lines.Enqueue(line);
+        characterIconImage.sprite = currentLine.characterIcon;
+        nameText.text = currentLine.characterName;
+        dialogueText.text = currentLine.text;
+    }
 
-//        DisplayNextDialogueLine();
-//    }
-
-//    public void DisplayNextDialogueLine()
-//    {
-//        if (lines.Count == 0)
-//        {
-//            EndDialogue();
-//            return;
-//        }
-
-//        DialogueLine currentLine = lines.Dequeue();
-
-//        characterIcon.sprite = currentLine.character.icon;
-//        characterName.text = currentLine.character.name;
-
-//        StopAllCoroutines();
-//        StartCoroutine(TypeSentence(currentLine));
-//    }
-
-//    IEnumerator TypeSentence(DialogueLine dialogueLine)
-//    {
-//        dialogueArea.text = "";
-//        foreach (char letter in dialogueLine.text.ToCharArray())
-//        {
-//            dialogueArea.text += letter;
-//            yield return new WaitForSecondsRealtime(isTypingSpeed);
-//        }
-//    }
-
-//    void EndDialogue()
-//    {
-//        isDialogueActive = false;
-
-//        if (dialoguePanel != null)
-//            dialoguePanel.SetActive(false);
-
-//        Time.timeScale = 1f;
-//        OnDialogueFinished?.Invoke();
-//    }
-//}
+    void EndDialogue()
+    {
+        dialoguePanel.SetActive(false);
+    }
+}

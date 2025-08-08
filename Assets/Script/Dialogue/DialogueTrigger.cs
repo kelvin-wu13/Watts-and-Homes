@@ -1,31 +1,12 @@
-//using System.Collections.Generic;
-//using UnityEngine;
+using UnityEngine;
+using System.Collections.Generic;
 
-//[System.Serializable]
-//public class DialogueCharacter
-//{
-//    public string name;
-//    public string icon;
-//}
+public class DialogueTrigger : MonoBehaviour
+{
+    public List<DialogueLine> dialogueLines = new List<DialogueLine>();
 
-//[System.Serializable]
-//public class DialogueLine
-//{
-//    public DialogueCharacter character;
-//    [TextArea(3, 10)]
-//    public string text;
-//}
-//[System.Serializable]
-//public class Dialogue
-//{
-//    public List<DialogueLine> dialogueLines = new List<DialogueLine>();
-//}
-//public class DialogueTrigger : MonoBehaviour
-//{
-//    public Dialogue dialogue;
-
-//    public void TriggerDialogue()
-//    {
-//        DialogueManager.Instance.StartDialogue(dialogue);
-//    }
-//}
+    public void TriggerDialogue()
+    {
+        DialogueManager.Instance.StartDialogue(dialogueLines);
+    }
+}
