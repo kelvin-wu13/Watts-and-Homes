@@ -726,7 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTitle: {fileID: 2009530400}
   objectiveContainer: {fileID: 220354436}
-  objectiveItemPrefab: {fileID: 1289255939400473587, guid: a5a526075c4aff34794442e5a31f0581, type: 3}
+  objectiveItemPrefab: {fileID: 1289255939400473587, guid: abc5407cef2fb1143b75d58199abf6f2, type: 3}
   starPreview: []
   starOn: {fileID: 6796564505602248458, guid: a41bb3ff30cff754b9d5c3a37d6fa1ae, type: 3}
   starOff: {fileID: -1586949051042832381, guid: a41bb3ff30cff754b9d5c3a37d6fa1ae, type: 3}

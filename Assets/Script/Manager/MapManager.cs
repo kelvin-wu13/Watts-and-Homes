@@ -20,11 +20,14 @@ public class MapManager : MonoBehaviour
 
     [Header("One-time Dialogs")]
     public DialogueTrigger mapIntroDialogue;
-    public int totalLevels = 5;   
+    public int totalLevels = 5;
+
+    public TextMeshProUGUI starCounterText;
 
     private HouseController houseForPopup;
     private HouseController selectedHouse;
     public string levelLobbySceneName = "LevelLobby";
+    public string mainMenuSceneName = "MainMenu";
 
     private void Awake()
     {
@@ -59,6 +62,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        UpdateStarCounter();
         RefreshAllHouses();
 
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsRunning)
@@ -70,6 +74,14 @@ public class MapManager : MonoBehaviour
             TryPlayPendingPostDialogue();
         }
     }
+    private void UpdateStarCounter()
+    {
+        if (!starCounterText) return;
+        int earned = GameProgress.GetTotalStarsEarned(totalLevels);
+        int total = totalLevels * 3;
+        starCounterText.text = $"{earned}/{total}";
+    }
+
     private void OnMapEntryDialogueFinished()
     {
         if (DialogueManager.Instance != null)
@@ -217,6 +229,10 @@ public class MapManager : MonoBehaviour
 
         LevelLaunchData.SetFromHouse(selectedHouse);
         SceneManager.LoadScene(levelLobbySceneName);
+    }
+    public void OnClick_BackToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuSceneName);
     }
 
 }

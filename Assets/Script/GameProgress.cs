@@ -37,12 +37,14 @@ public static class GameProgress
         for (int i = 0; i < maxLevels; i++) sum += GetStars(i);
         return sum;
     }
+    public static void ClearDialogueKey(string key)
+    {
+        if (!string.IsNullOrEmpty(key)) PlayerPrefs.DeleteKey(key);
+    }
     public static void ResetAllProgress(int maxLevels)
     {
         PlayerPrefs.DeleteKey(UnlockedLevelKey);
-
-        for (int i = 0; i < maxLevels; i++)
-            PlayerPrefs.DeleteKey(StarsKey(i));
+        for (int i = 0; i < maxLevels; i++) PlayerPrefs.DeleteKey(StarsKey(i));
 
         PlayerPrefs.DeleteKey(MapIntroSeenKey);
         for (int i = 0; i < maxLevels; i++)
@@ -50,14 +52,16 @@ public static class GameProgress
             PlayerPrefs.DeleteKey(HouseIntroSeenKey(i));
             PlayerPrefs.DeleteKey(HousePostSeenKey(i));
         }
-
         PlayerPrefs.DeleteKey(PendingPostLevelKey);
+
+        PlayerPrefs.DeleteKey("MapIntro");
 
         PlayerPrefs.Save();
     }
     public static void InitializeNewGame()
     {
         PlayerPrefs.SetInt(UnlockedLevelKey, 0);
+        PlayerPrefs.DeleteKey("MapIntro");
         PlayerPrefs.Save();
     }
 }

@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b743d38adaf1b49a92a037e5c4fa3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: dasdawdad
+  description: Successfully power the device
   uiElement: {fileID: 0}
   targetsToCheck:
   - {fileID: 7653745847059288473}
@@ -1835,8 +1835,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 13.299999}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 11.200001}
+  m_SizeDelta: {x: 100, y: 61.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &714826003
 MonoBehaviour:
@@ -2246,7 +2246,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 250}
+  m_SizeDelta: {x: 471.16, y: 154.91}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &744786009
 MonoBehaviour:
@@ -3002,10 +3002,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d30b3c5bfd0b7a40892bfcd752a6d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 'Gunakan Item '
+  description: Use the fewest tools possible
   uiElement: {fileID: 0}
   typesToCount: 0000000002000000
-  maxAllowedCount: 3
+  maxAllowedCount: 1
 --- !u!4 &1344329152
 Transform:
   m_ObjectHideFlags: 0
@@ -3612,7 +3612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43030a8ac7b0b3644a69f5871418b258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: waadasda
+  description: Provide exactly the required power
   uiElement: {fileID: 0}
   targetsToCheck:
   - {fileID: 7653745847059288473}
@@ -4425,8 +4425,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.72, y: 0.82, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5732698336810461528}
   - {fileID: 7279306011253023227}

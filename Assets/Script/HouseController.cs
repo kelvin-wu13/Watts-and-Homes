@@ -1,6 +1,8 @@
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class HouseController : MonoBehaviour
 {
@@ -36,7 +38,8 @@ public class HouseController : MonoBehaviour
     }
     private void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        // Blokir input bila pointer di atas UI Graphic (bukan collider dunia)
+        if (IsPointerOverPureUI())
         {
             if (isHovering)
             {
@@ -48,10 +51,13 @@ public class HouseController : MonoBehaviour
 
         if (!isUnlocked) return;
 
-        RaycastHit2D hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue()));
-
+        // Raycast 2D sama seperti hover, supaya klik konsisten
+        RaycastHit2D hit = Physics2D.GetRayIntersection(
+            mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue())
+        );
         bool mouseIsOver = (hit.collider != null && hit.collider.gameObject == this.gameObject);
 
+        // Hover visual
         if (mouseIsOver && !isHovering)
         {
             isHovering = true;
@@ -63,24 +69,84 @@ public class HouseController : MonoBehaviour
             spriteRenderer.sprite = defaultSprite;
         }
 
-        if (isHovering && Mouse.current.leftButton.wasPressedThisFrame)
+        // Klik kiri → dialog/popup
+        if (mouseIsOver
+            && Mouse.current.leftButton.wasPressedThisFrame
+            && !waitingForDialogue
+            && !(DialogueManager.Instance != null && DialogueManager.Instance.IsRunning))
         {
-            if (waitingForDialogue) return;
+            OpenIntroOrPopup();
+        }
+    }
+    private void OpenIntroOrPopup()
+    {
+        bool canIntro =
+            levelIntroDialogue != null &&
+            levelIntroDialogue.dialogueLines != null &&
+            levelIntroDialogue.dialogueLines.Count > 0 &&
+            !GameProgress.HasSeenHouseIntro(levelData.levelIndex);
 
-            if (levelIntroDialogue != null && levelIntroDialogue.dialogueLines.Count > 0)
+        Debug.Log($"[HouseController] Klik house {levelData.levelIndex}, canIntro={canIntro}");
+
+        if (canIntro)
+        {
+            Debug.Log($"[HouseController] Memulai intro dialogue untuk house {levelData.levelIndex}");
+
+            DialogueManager.Instance.OnDialogueEnd += OnHouseIntroFinished;
+            levelIntroDialogue.TriggerDialogue();
+
+            if (DialogueManager.Instance == null || !DialogueManager.Instance.IsRunning)
             {
-                waitingForDialogue = true;
-                DialogueManager.Instance.OnDialogueEnd += OnHouseIntroFinished;
-                levelIntroDialogue.TriggerDialogue();
-            }
-            else
-            {
+                Debug.Log("[HouseController] DialogueManager tidak berjalan, langsung buka popup");
+
+                DialogueManager.Instance.OnDialogueEnd -= OnHouseIntroFinished;
+                GameProgress.MarkHouseIntroSeen(levelData.levelIndex);
+
+                waitingForDialogue = false;
                 MapManager.Instance.PrepareLevelPopup(this);
+                return;
             }
+
+            waitingForDialogue = true;
+        }
+        else
+        {
+            Debug.Log($"[HouseController] Intro sudah pernah dilihat atau tidak ada, langsung buka popup untuk house {levelData.levelIndex}");
+            MapManager.Instance.PrepareLevelPopup(this);
         }
     }
 
+    private void OnHouseIntroFinished()
+    {
+        // Lepas listener biar tidak nyangkut
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.OnDialogueEnd -= OnHouseIntroFinished;
 
+        // Tandai intro rumah sudah pernah dilihat
+        GameProgress.MarkHouseIntroSeen(levelData.levelIndex);
+
+        waitingForDialogue = false;
+
+        // Setelah dialog intro selesai, langsung tampilkan popup level
+        if (MapManager.Instance != null)
+            MapManager.Instance.PrepareLevelPopup(this);
+    }
+
+    private bool IsPointerOverPureUI()
+    {
+        if (EventSystem.current == null) return false;
+
+        Vector2 pos = Pointer.current != null ? Pointer.current.position.ReadValue() : Vector2.zero;
+        var ped = new PointerEventData(EventSystem.current) { position = pos };
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(ped, results);
+
+        // TRUE hanya jika modulnya GraphicRaycaster (UI beneran)
+        foreach (var r in results)
+            if (r.module is GraphicRaycaster) return true;
+
+        return false;
+    }
     public void UpdateVisualState()
     {
         if (levelData == null) return;
@@ -139,35 +205,6 @@ public class HouseController : MonoBehaviour
         {
             spriteRenderer.sprite = defaultSprite;
         }
-    }
-    private void OnMouseDown()
-    {
-        if (!isUnlocked) return;
-        if (waitingForDialogue) return;
-        if (DialogueManager.Instance != null && DialogueManager.Instance.IsRunning) return;
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
-
-        if (levelIntroDialogue != null && levelIntroDialogue.dialogueLines != null && levelIntroDialogue.dialogueLines.Count > 0 && !GameProgress.HasSeenHouseIntro(levelData.levelIndex))
-        {
-            waitingForDialogue = true;
-            DialogueManager.Instance.OnDialogueEnd += OnHouseIntroFinished;
-            levelIntroDialogue.TriggerDialogue();
-        }
-        else
-        {
-            MapManager.Instance.PrepareLevelPopup(this);
-        }
-    }
-    private void OnHouseIntroFinished()
-    {
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.OnDialogueEnd -= OnHouseIntroFinished;
-        }
-
-        GameProgress.MarkHouseIntroSeen(levelData.levelIndex);
-        waitingForDialogue = false;
-        MapManager.Instance.PrepareLevelPopup(this);
     }
 
     private void OnDialogueFinished()
