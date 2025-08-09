@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class HouseController : MonoBehaviour
 {
@@ -9,15 +10,19 @@ public class HouseController : MonoBehaviour
     public Sprite lockedSprite;
     public Sprite starCompleteSprite;
     public Sprite starIncompleteSprite;
+    private Sprite defaultSprite;
 
     public GameObject starsDisplayContainer;
+    public DialogueTrigger levelIntroDialogue;
+    public DialogueTrigger levelPostDialogue;
 
-    private Sprite defaultSprite;
     private SpriteRenderer spriteRenderer;
     private bool isUnlocked = false;
 
     private Camera mainCamera;
     private bool isHovering = false;
+
+    private bool waitingForDialogue = false;
 
     private void Awake()
     {
@@ -31,10 +36,20 @@ public class HouseController : MonoBehaviour
     }
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            if (isHovering)
+            {
+                isHovering = false;
+                spriteRenderer.sprite = defaultSprite;
+            }
+            return;
+        }
+
         if (!isUnlocked) return;
 
         RaycastHit2D hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue()));
-      
+
         bool mouseIsOver = (hit.collider != null && hit.collider.gameObject == this.gameObject);
 
         if (mouseIsOver && !isHovering)
@@ -50,7 +65,18 @@ public class HouseController : MonoBehaviour
 
         if (isHovering && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            MapManager.Instance.ShowLevelPopup(this);
+            if (waitingForDialogue) return;
+
+            if (levelIntroDialogue != null && levelIntroDialogue.dialogueLines.Count > 0)
+            {
+                waitingForDialogue = true;
+                DialogueManager.Instance.OnDialogueEnd += OnHouseIntroFinished;
+                levelIntroDialogue.TriggerDialogue();
+            }
+            else
+            {
+                MapManager.Instance.PrepareLevelPopup(this);
+            }
         }
     }
 
@@ -116,9 +142,39 @@ public class HouseController : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (isUnlocked)
+        if (!isUnlocked) return;
+        if (waitingForDialogue) return;
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsRunning) return;
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
+        if (levelIntroDialogue != null && levelIntroDialogue.dialogueLines != null && levelIntroDialogue.dialogueLines.Count > 0 && !GameProgress.HasSeenHouseIntro(levelData.levelIndex))
         {
-            MapManager.Instance.ShowLevelPopup(this);
+            waitingForDialogue = true;
+            DialogueManager.Instance.OnDialogueEnd += OnHouseIntroFinished;
+            levelIntroDialogue.TriggerDialogue();
         }
+        else
+        {
+            MapManager.Instance.PrepareLevelPopup(this);
+        }
+    }
+    private void OnHouseIntroFinished()
+    {
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.OnDialogueEnd -= OnHouseIntroFinished;
+        }
+
+        GameProgress.MarkHouseIntroSeen(levelData.levelIndex);
+        waitingForDialogue = false;
+        MapManager.Instance.PrepareLevelPopup(this);
+    }
+
+    private void OnDialogueFinished()
+    {
+        DialogueManager.Instance.OnDialogueEnd -= OnDialogueFinished;
+        waitingForDialogue = false;
+
+        MapManager.Instance.PrepareLevelPopup(this);
     }
 }

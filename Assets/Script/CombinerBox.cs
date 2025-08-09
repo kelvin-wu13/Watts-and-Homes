@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class CombinerBox : MonoBehaviour, IPowerDataProvider
 {
-    [Header("Item Configuration")]
     public ItemData itemData;
 
-    [Header("Connection Points")]
     [SerializeField] private ConnectionPoint inputConnectionPoint;
     [SerializeField] private ConnectionPoint outputConnectionPoint;
 
-    [Header("Power Management")]
     [SerializeField] private float totalInputPower = 0f;
     [SerializeField] private float remainingPower = 0f;
     [SerializeField] private List<float> outputPowerValues = new List<float>();
@@ -40,7 +37,7 @@ public class CombinerBox : MonoBehaviour, IPowerDataProvider
     }
     public string GetPowerDisplayText()
     {
-        return $"In: {totalInputPower:F1}";
+        return $"{totalInputPower:F1}";
     }
 
     private void ValidateItemData()

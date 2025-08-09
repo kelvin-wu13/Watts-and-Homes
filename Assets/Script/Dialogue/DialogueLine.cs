@@ -1,10 +1,17 @@
 using UnityEngine;
 
-public class DialogueLine : MonoBehaviour
+[System.Serializable]
+public class DialogueLine
 {
-    public string characterName;
-    public Sprite characterIcon;
+    public enum SpeakerType { Player, NPC }
+    public SpeakerType speaker;
 
-    [TextArea(3,10)]
+    public enum SpeakerSlot { Left1, Left2, Right1, Right2 }
+    public SpeakerSlot slot;
+
+    public Sprite characterSprite;
+    public Sprite characterNameplate;
+
+    [TextArea(3, 10)]
     public string text;
 }

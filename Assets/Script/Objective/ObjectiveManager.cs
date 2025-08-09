@@ -92,7 +92,8 @@ public class ObjectiveManager : MonoBehaviour
         }
 
         GameProgress.SaveStars(currentLevelIndex, starsEarned);
-        GameProgress.UnlockNextLevel(currentLevelIndex);
+        GameProgress.UnlockLevel(currentLevelIndex + 1);
+        GameProgress.SetPendingPostLevel(currentLevelIndex);
 
         if (UIManager.Instance != null)
         {
