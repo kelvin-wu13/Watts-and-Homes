@@ -56,7 +56,7 @@ public class LevelLobbyUI : MonoBehaviour
 
     private void BuildStarPreview()
     {
-        int stars = GameProgress.GetStars(levelIndex); // sebelumnya: data.levelIndex
+        int stars = GameProgress.GetStars(levelIndex);
         for (int i = 0; i < starPreview.Length; i++)
         {
             if (!starPreview[i]) continue;
@@ -66,12 +66,12 @@ public class LevelLobbyUI : MonoBehaviour
 
     private void StartLevel()
     {
-        SceneManager.LoadScene(sceneNameToLoad); // sebelumnya: data.sceneNameToLoad
+        SceneManager.LoadScene(sceneNameToLoad);
     }
 
     private void BackToMap()
     {
-        GameProgress.ClearPendingLevel(); // sebelumnya: LevelLaunchData.Clear()
+        GameProgress.ClearPendingLevel(); 
         SceneManager.LoadScene("Map");
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CableInteractable : MonoBehaviour
@@ -7,6 +7,9 @@ public class CableInteractable : MonoBehaviour
 
     [Header("Collider Settings")]
     public float colliderWidth = 0.5f;
+
+    [Header("Inventory")]
+    public string inventorySlotId = "Cable"; 
 
     private LineRenderer lineRenderer;
     private BoxCollider2D boxCollider;
@@ -22,115 +25,99 @@ public class CableInteractable : MonoBehaviour
         mainCamera = Camera.main;
         lineRenderer = GetComponentInParent<LineRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
-        originalColor = lineRenderer.startColor;
+        if (lineRenderer != null) originalColor = lineRenderer.startColor;
     }
 
     public void Initialize(ConnectionPoint p1, ConnectionPoint p2)
     {
-        this.point1 = p1;
-        this.point2 = p2;
-
+        point1 = p1;
+        point2 = p2;
         UpdateBoxCollider();
     }
 
     void Update()
     {
         UpdateCablePositions();
+        if (lineRenderer == null || boxCollider == null) return;
 
-        if (lineRenderer != null && boxCollider != null)
+        if (GameManager.currentState != GameManager.GameState.Normal)
         {
-            if (GameManager.currentState != GameManager.GameState.Normal)
-            {
-                if (isHovering)
-                {
-                    isHovering = false;
-                    lineRenderer.startColor = originalColor;
-                    lineRenderer.endColor = originalColor;
-                }
-                return;
-            }
-
-            RaycastHit2D hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue()));
-            bool mouseIsOver = (hit.collider != null && hit.collider.gameObject == this.gameObject);
-
-            if (mouseIsOver && !isHovering)
-            {
-                isHovering = true;
-                lineRenderer.startColor = hoverColor;
-                lineRenderer.endColor = hoverColor;
-            }
-            else if (!mouseIsOver && isHovering)
+            if (isHovering)
             {
                 isHovering = false;
                 lineRenderer.startColor = originalColor;
                 lineRenderer.endColor = originalColor;
             }
+            return;
+        }
 
-            if (isHovering && Mouse.current.rightButton.wasPressedThisFrame)
-            {
-                DestroyCable();
-            }
+        RaycastHit2D hit = Physics2D.GetRayIntersection(
+            mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue())
+        );
+        bool mouseIsOver = (hit.collider != null && hit.collider.gameObject == gameObject);
+
+        if (mouseIsOver && !isHovering)
+        {
+            isHovering = true;
+            lineRenderer.startColor = hoverColor;
+            lineRenderer.endColor = hoverColor;
+        }
+        else if (!mouseIsOver && isHovering)
+        {
+            isHovering = false;
+            lineRenderer.startColor = originalColor;
+            lineRenderer.endColor = originalColor;
+        }
+
+        if (isHovering && Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            DestroyCable();
         }
     }
-    
+
     public void DestroyCable()
     {
         if (lineRenderer == null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
 
         GameObject cableObject = lineRenderer.gameObject;
 
-        ResetConnectedTargetsPower();
+        if (point1 != null) point1.DisconnectCable(cableObject);
+        if (point2 != null) point2.DisconnectCable(cableObject);
 
-        if (point1 != null)
-        {
-            point1.DisconnectCable(cableObject);
-        }
-        if (point2 != null)
-        {
-            point2.DisconnectCable(cableObject);
-        }
+        InventoryManager.Instance?.Refund(inventorySlotId);
+
         Destroy(cableObject);
     }
 
     private void UpdateCablePositions()
     {
-        if (point1 == null || point2 == null || lineRenderer == null)
-            return;
+        if (point1 == null || point2 == null || lineRenderer == null) return;
 
         lineRenderer.SetPosition(0, point1.transform.position);
         lineRenderer.SetPosition(1, point2.transform.position);
-
         UpdateBoxCollider();
     }
+
     public ConnectionPoint GetOtherPoint(ConnectionPoint knownPoint)
     {
-        if (knownPoint == point1)
-        {
-            return point2;
-        }
-        if (knownPoint == point2)
-        {
-            return point1;
-        }
+        if (knownPoint == point1) return point2;
+        if (knownPoint == point2) return point1;
         return null;
     }
 
     private void UpdateBoxCollider()
     {
-        if (boxCollider == null || point1 == null || point2 == null)
-            return;
+        if (boxCollider == null || point1 == null || point2 == null) return;
 
         Vector3 pos1 = point1.transform.position;
         Vector3 pos2 = point2.transform.position;
 
         Vector3 center = (pos1 + pos2) / 2f;
-
         float distance = Vector3.Distance(pos1, pos2);
-
         Vector3 direction = (pos2 - pos1).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -138,8 +125,6 @@ public class CableInteractable : MonoBehaviour
         boxCollider.transform.position = center;
         boxCollider.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
-    private void ResetConnectedTargetsPower()
-    {
 
-    }
+    private void ResetConnectedTargetsPower() { /* TODO: if needed */ }
 }

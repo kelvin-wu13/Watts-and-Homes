@@ -5,9 +5,12 @@ using UnityEngine.EventSystems;
 public class InteractiveObject : MonoBehaviour
 {
     public GameObject itemPrefab;
+    public string slotId;
+
     private Camera mainCamera;
 
     private static GameObject previewInstance;
+    private static InteractiveObject activeOwner;
 
     private void Start()
     {
@@ -16,14 +19,15 @@ public class InteractiveObject : MonoBehaviour
 
     public void OnPress()
     {
-        if (previewInstance != null)
-        {
-            Destroy(previewInstance);
-        }
+        if (InventoryManager.Instance && !InventoryManager.Instance.CanUse(slotId)) return;
 
+        if (previewInstance != null) Destroy(previewInstance);
+        activeOwner = this;
+
+        if (previewInstance != null) Destroy(previewInstance);
         previewInstance = Instantiate(itemPrefab);
-
         SetupPreviewAppearance(previewInstance);
+        Debug.Log($"[InteractiveObject] OnPress slotId='{slotId}'");
     }
     private void SetupPreviewAppearance(GameObject preview)
     {
@@ -53,6 +57,8 @@ public class InteractiveObject : MonoBehaviour
 
     private void Update()
     {
+        if (activeOwner != this) return;
+
         if (previewInstance != null)
         {
             previewInstance.transform.position = GetMouseWorldPos();
@@ -61,33 +67,43 @@ public class InteractiveObject : MonoBehaviour
             {
                 PlaceObject();
             }
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                Destroy(previewInstance);
+                previewInstance = null;
+            }
         }
     }
 
     private void PlaceObject()
     {
+        // finalize visual
         var spriteRenderer = previewInstance.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.white;
-        }
+        if (spriteRenderer != null) spriteRenderer.color = Color.white;
 
         var collider = previewInstance.GetComponent<Collider2D>();
-        if (collider != null)
+        if (collider != null) collider.enabled = true;
+
+        foreach (var canvas in previewInstance.GetComponentsInChildren<Canvas>())
         {
-            collider.enabled = true;
+            var cg = canvas.GetComponent<CanvasGroup>();
+            if (cg) cg.alpha = 1f;
         }
 
-        var canvasComponents = previewInstance.GetComponentsInChildren<Canvas>();
-        foreach (var canvas in canvasComponents)
+        // konsumsi slot utk owner saat ini
+        bool ok = true;
+        if (InventoryManager.Instance)
+            ok = InventoryManager.Instance.Consume(slotId, previewInstance);
+
+        if (!ok)
         {
-            var canvasGroup = canvas.GetComponent<CanvasGroup>();
-            if (canvasGroup != null)
-            {
-                canvasGroup.alpha = 1f;
-            }
+            Debug.LogWarning($"[PlaceObject] Gagal consume slot '{slotId}'.");
+            Destroy(previewInstance);
         }
+
+        // selesai
         previewInstance = null;
+        activeOwner = null;
     }
     private Vector3 GetMouseWorldPos()
     {

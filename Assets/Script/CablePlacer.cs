@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
@@ -6,9 +6,11 @@ public class CablePlacer : MonoBehaviour
 {
     private enum PlacementState { Idle, WaitingForFirstPoint, WaitingForSecondPoint }
 
+    [SerializeField] private string slotId = "Cable";
+
     [Header("Line Settings")]
     public Material lineMaterial;
-    public Color lineColor = Color.orange;
+    public Color lineColor = new Color(1f, 0.5f, 0f);
     public float lineWidth = 0.5f;
     public int cableSortingOrder = -1;
 
@@ -36,7 +38,10 @@ public class CablePlacer : MonoBehaviour
 
     public void StartPlacingCable()
     {
+        if (InventoryManager.Instance && !InventoryManager.Instance.CanUse(slotId)) return;
         if (currentState != PlacementState.Idle) return;
+
+        GameManager.SetState(GameManager.GameState.PlacingCable);
 
         GameObject lineObject = new GameObject("Cable_Runtime");
         lineObject.transform.position = Vector3.zero;
@@ -48,7 +53,6 @@ public class CablePlacer : MonoBehaviour
         currentLine.startWidth = lineWidth;
         currentLine.endWidth = lineWidth;
         currentLine.positionCount = 2;
-
         currentLine.sortingOrder = cableSortingOrder;
 
         currentState = PlacementState.WaitingForFirstPoint;
@@ -72,7 +76,9 @@ public class CablePlacer : MonoBehaviour
 
         if (currentState == PlacementState.WaitingForFirstPoint || currentState == PlacementState.WaitingForSecondPoint)
         {
-            Vector3 startPos = (currentState == PlacementState.WaitingForFirstPoint) ? mousePos : firstConnectionPoint.transform.position;
+            Vector3 startPos = (currentState == PlacementState.WaitingForFirstPoint)
+                                ? mousePos
+                                : firstConnectionPoint.transform.position;
             currentLine.SetPosition(0, startPos);
             currentLine.SetPosition(1, mousePos);
         }
@@ -82,14 +88,11 @@ public class CablePlacer : MonoBehaviour
             Ray cameraRay = mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
             RaycastHit2D hit = Physics2D.GetRayIntersection(cameraRay, Mathf.Infinity, connectableLayer);
 
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.CompareTag("IConnectable"))
             {
-                if (hit.collider.CompareTag("IConnectable"))
+                if (hit.collider.TryGetComponent(out ConnectionPoint clickedPoint))
                 {
-                    if (hit.collider.TryGetComponent(out ConnectionPoint clickedPoint))
-                    {
-                        HandleConnectionPointClick(clickedPoint);
-                    }
+                    HandleConnectionPointClick(clickedPoint);
                 }
             }
         }
@@ -126,7 +129,6 @@ public class CablePlacer : MonoBehaviour
 
             GameObject colliderObj = new GameObject("CableCollider");
             colliderObj.transform.SetParent(currentLine.transform);
-
             colliderObj.transform.position = center;
             colliderObj.transform.rotation = Quaternion.Euler(0, 0, angle);
 
@@ -134,34 +136,43 @@ public class CablePlacer : MonoBehaviour
             lineCollider.size = new Vector2(distance, cableColliderWidth);
 
             CableInteractable interactable = colliderObj.AddComponent<CableInteractable>();
-            interactable.hoverColor = this.cableHoverColor;
-            interactable.colliderWidth = this.cableColliderWidth;
+            interactable.hoverColor = cableHoverColor;
+            interactable.colliderWidth = cableColliderWidth;
             interactable.Initialize(firstConnectionPoint, point);
-
+            interactable.inventorySlotId = slotId; 
 
             currentLine.sortingOrder = cableSortingOrder;
 
-            SetConnections(firstConnectionPoint, point);
+            bool ok = true;
+            if (InventoryManager.Instance)
+                ok = InventoryManager.Instance.Consume(slotId, currentLine.gameObject);
 
+            if (!ok)
+            {
+                firstConnectionPoint.DisconnectCable(currentLine.gameObject);
+                point.DisconnectCable(currentLine.gameObject);
+                Destroy(currentLine.gameObject);
+                ResetPlacement();
+                return;
+            }
+
+            SetConnections(firstConnectionPoint, point);
             ResetPlacement();
         }
     }
 
     private void SetConnections(ConnectionPoint point1, ConnectionPoint point2)
     {
-       
     }
 
     private void CancelPlacement()
     {
         if (firstConnectionPoint != null && currentLine != null)
-        {
             firstConnectionPoint.DisconnectCable(currentLine.gameObject);
-        }
+
         if (currentLine != null)
-        {
             Destroy(currentLine.gameObject);
-        }
+
         ResetPlacement();
     }
 
