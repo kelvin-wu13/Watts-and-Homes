@@ -38,7 +38,6 @@ public class HouseController : MonoBehaviour
     }
     private void Update()
     {
-        // Blokir input bila pointer di atas UI Graphic (bukan collider dunia)
         if (IsPointerOverPureUI())
         {
             if (isHovering)
@@ -51,13 +50,11 @@ public class HouseController : MonoBehaviour
 
         if (!isUnlocked) return;
 
-        // Raycast 2D sama seperti hover, supaya klik konsisten
         RaycastHit2D hit = Physics2D.GetRayIntersection(
             mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue())
         );
         bool mouseIsOver = (hit.collider != null && hit.collider.gameObject == this.gameObject);
 
-        // Hover visual
         if (mouseIsOver && !isHovering)
         {
             isHovering = true;
@@ -69,7 +66,6 @@ public class HouseController : MonoBehaviour
             spriteRenderer.sprite = defaultSprite;
         }
 
-        // Klik kiri → dialog/popup
         if (mouseIsOver
             && Mouse.current.leftButton.wasPressedThisFrame
             && !waitingForDialogue
@@ -118,16 +114,13 @@ public class HouseController : MonoBehaviour
 
     private void OnHouseIntroFinished()
     {
-        // Lepas listener biar tidak nyangkut
         if (DialogueManager.Instance != null)
             DialogueManager.Instance.OnDialogueEnd -= OnHouseIntroFinished;
 
-        // Tandai intro rumah sudah pernah dilihat
         GameProgress.MarkHouseIntroSeen(levelData.levelIndex);
 
         waitingForDialogue = false;
 
-        // Setelah dialog intro selesai, langsung tampilkan popup level
         if (MapManager.Instance != null)
             MapManager.Instance.PrepareLevelPopup(this);
     }
@@ -141,7 +134,6 @@ public class HouseController : MonoBehaviour
         var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(ped, results);
 
-        // TRUE hanya jika modulnya GraphicRaycaster (UI beneran)
         foreach (var r in results)
             if (r.module is GraphicRaycaster) return true;
 

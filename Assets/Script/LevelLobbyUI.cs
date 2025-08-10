@@ -13,6 +13,10 @@ public class LevelLobbyUI : MonoBehaviour
     public Sprite starOn;
     public Sprite starOff;
 
+    private int levelIndex;
+    private string sceneNameToLoad;
+    private System.Collections.Generic.List<string> objectives;
+
     [Header("Buttons")]
     public Button startButton;
     public Button backButton;
@@ -21,15 +25,13 @@ public class LevelLobbyUI : MonoBehaviour
 
     private void Start()
     {
-        if (!LevelLaunchData.IsValid)
+        if (!GameProgress.TryGetPendingLevel(out levelIndex, out sceneNameToLoad, out objectives))
         {
             SceneManager.LoadScene("Map");
             return;
         }
 
-        data = LevelLaunchData.LevelData;
-
-        if (levelTitle) levelTitle.text = $"Level {data.levelIndex + 1}";
+        if (levelTitle) levelTitle.text = $"Level {levelIndex + 1}";
         BuildObjectives();
         BuildStarPreview();
 
@@ -42,20 +44,19 @@ public class LevelLobbyUI : MonoBehaviour
         if (!objectiveContainer || !objectiveItemPrefab) return;
         foreach (Transform c in objectiveContainer) Destroy(c.gameObject);
 
-        var list = data.objectiveDescriptions ?? new System.Collections.Generic.List<string>();
+        var list = objectives ?? new System.Collections.Generic.List<string>();
         foreach (var desc in list)
         {
             var go = Instantiate(objectiveItemPrefab, objectiveContainer);
             var ui = go.GetComponent<ObjectiveItemUI>();
             if (ui && ui.objectiveText) ui.objectiveText.text = desc;
-
             if (ui && ui.statusIcon && starOff) ui.statusIcon.sprite = starOff;
         }
     }
 
     private void BuildStarPreview()
     {
-        int stars = GameProgress.GetStars(data.levelIndex);
+        int stars = GameProgress.GetStars(levelIndex); // sebelumnya: data.levelIndex
         for (int i = 0; i < starPreview.Length; i++)
         {
             if (!starPreview[i]) continue;
@@ -65,12 +66,12 @@ public class LevelLobbyUI : MonoBehaviour
 
     private void StartLevel()
     {
-        SceneManager.LoadScene(data.sceneNameToLoad);
+        SceneManager.LoadScene(sceneNameToLoad); // sebelumnya: data.sceneNameToLoad
     }
 
     private void BackToMap()
     {
-        LevelLaunchData.Clear();
+        GameProgress.ClearPendingLevel(); // sebelumnya: LevelLaunchData.Clear()
         SceneManager.LoadScene("Map");
     }
 }

@@ -151,9 +151,13 @@ public class SettingsManager : MonoBehaviour
 
         page = Mathf.Clamp(page, 0, tutorialPages.Length - 1);
         tutorialImage.sprite = tutorialPages[page];
-        tutorialImage.SetNativeSize(); 
-        tutorialImage.preserveAspect = true; 
+
+        tutorialImage.preserveAspect = true;
+
+        var rt = tutorialImage.rectTransform;
+        rt.anchoredPosition = Vector2.zero;
     }
+
     void SetHidden(bool hidden)
     {
         if (hideWhileTutorial == null) return;

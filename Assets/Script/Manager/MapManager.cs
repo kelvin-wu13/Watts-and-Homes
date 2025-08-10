@@ -96,15 +96,24 @@ public class MapManager : MonoBehaviour
     }
     private void UpdateLockableButton()
     {
-        if (specialButton == null || specialButtonImage == null) return;
+        if (specialButton == null || specialButtonImage == null)
+        {
+            Debug.LogWarning("[MapManager] Special button/image belum di-assign!");
+            return;
+        }
 
         int earned = GameProgress.GetTotalStarsEarned(totalLevels);
         bool unlocked = earned >= starsRequiredToUnlock;
 
         specialButton.interactable = unlocked;
+
         if (specialLockedSprite && specialUnlockedSprite)
+        {
+            Debug.Log($"[MapManager] UpdateLockableButton -> target Image: {specialButtonImage.name}, unlocked={unlocked}");
             specialButtonImage.sprite = unlocked ? specialUnlockedSprite : specialLockedSprite;
+        }
     }
+
     public void RefreshMapUI()
     {
         UpdateStarCounter();
@@ -221,7 +230,6 @@ public class MapManager : MonoBehaviour
                     ui.statusIcon.sprite = isComplete ? completedSprite : incompleteSprite;
             }
         }
-
         if (levelPopupPanel) levelPopupPanel.SetActive(true);
         if (blockerButton != null)
         {
@@ -254,9 +262,20 @@ public class MapManager : MonoBehaviour
     }
     public void OnClick_OpenLevelLobby()
     {
-        if (selectedHouse == null || selectedHouse.levelData == null) return;
+        if (blockerButton) blockerButton.gameObject.SetActive(false);
+        if (levelPopupPanel) levelPopupPanel.SetActive(false);
 
-        LevelLaunchData.SetFromHouse(selectedHouse);
+        if (selectedHouse == null || selectedHouse.levelData == null)
+        {
+            Debug.LogWarning("[MapManager] Play pressed but selectedHouse is null.");
+            return;
+        }
+
+        var ld = selectedHouse.levelData;
+        GameProgress.SetPendingLevel(ld.levelIndex, ld.sceneNameToLoad, ld.objectiveDescriptions);
+        Debug.Log($"[MapManager] Set pending level {ld.levelIndex} -> '{ld.sceneNameToLoad}'");
+
+        Debug.Log($"[MapManager] Loading LevelLobby '{levelLobbySceneName}' for Level {ld.levelIndex}");
         SceneManager.LoadScene(levelLobbySceneName);
     }
     public void OnClick_BackToMainMenu()

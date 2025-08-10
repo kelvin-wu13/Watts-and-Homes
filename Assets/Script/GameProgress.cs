@@ -2,6 +2,9 @@ using UnityEngine;
 
 public static class GameProgress
 {
+    private const string PendingLevelIndexKey = "PendingLevelIndex";
+    private const string PendingLevelSceneKey = "PendingLevelScene";
+    private const string PendingLevelObjectivesKey = "PendingLevelObjectives";
     private const string UnlockedLevelKey = "UnlockedLevel";
     private static string StarsKey(int lv) => $"LevelStars_{lv}";
 
@@ -36,6 +39,34 @@ public static class GameProgress
         int sum = 0;
         for (int i = 0; i < maxLevels; i++) sum += GetStars(i);
         return sum;
+    }
+    public static void SetPendingLevel(int index, string sceneName, System.Collections.Generic.List<string> objectives)
+    {
+        PlayerPrefs.SetInt(PendingLevelIndexKey, index);
+        PlayerPrefs.SetString(PendingLevelSceneKey, sceneName ?? "");
+        string joined = (objectives == null || objectives.Count == 0) ? "" : string.Join("\n", objectives);
+        PlayerPrefs.SetString(PendingLevelObjectivesKey, joined);
+        PlayerPrefs.Save();
+    }
+
+    public static bool TryGetPendingLevel(out int index, out string sceneName, out System.Collections.Generic.List<string> objectives)
+    {
+        index = PlayerPrefs.GetInt(PendingLevelIndexKey, -1);
+        sceneName = PlayerPrefs.GetString(PendingLevelSceneKey, "");
+        string joined = PlayerPrefs.GetString(PendingLevelObjectivesKey, "");
+        objectives = new System.Collections.Generic.List<string>();
+        if (!string.IsNullOrEmpty(joined))
+            objectives.AddRange(joined.Split('\n'));
+
+        return index >= 0 && !string.IsNullOrEmpty(sceneName);
+    }
+
+    public static void ClearPendingLevel()
+    {
+        PlayerPrefs.DeleteKey(PendingLevelIndexKey);
+        PlayerPrefs.DeleteKey(PendingLevelSceneKey);
+        PlayerPrefs.DeleteKey(PendingLevelObjectivesKey);
+        PlayerPrefs.Save();
     }
     public static void ClearDialogueKey(string key)
     {

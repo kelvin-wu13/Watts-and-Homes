@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 745cbb6a84e85e84bb9fe17f23c4d7f5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainMenuBGM: {fileID: 8300000, guid: 0b871da6e5f92cb4ea0ea4d8c6ad5b5d, type: 3}
+  - gameBGM: {fileID: 8300000, guid: f04bc3b4afd57df4092cc29e1cbf8823, type: 3}
+  - uiClickSFX: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  - uiHoverSFX: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
