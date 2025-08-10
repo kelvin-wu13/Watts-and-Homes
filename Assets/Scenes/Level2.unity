@@ -953,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a53184af0b7cf4292738feae7c9255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevelIndex: 0
+  currentLevelIndex: 1
   objectives:
   - {fileID: 1344329151}
   - {fileID: 461716312}
@@ -3120,10 +3120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d30b3c5bfd0b7a40892bfcd752a6d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Use the fewest tools possible(1)
+  description: Use the fewest tools possible(5)
   uiElement: {fileID: 0}
   typesToCount: 0000000002000000
-  maxAllowedCount: 1
+  maxAllowedCount: 5
 --- !u!4 &1344329152
 Transform:
   m_ObjectHideFlags: 0
@@ -5466,7 +5466,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1479544043801469651, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  m_Sprite: {fileID: -4119334708683220384, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5668,7 +5668,7 @@ GameObject:
   - component: {fileID: 7653745847059288473}
   - component: {fileID: 1724460907538942331}
   m_Layer: 0
-  m_Name: Bulb
+  m_Name: Target
   m_TagString: IConnectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6414,8 +6414,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 42a1eafa5bdbd4b4fb5e2d716a8646fc, type: 2}
-  m_sharedMaterial: {fileID: -1521462146439271639, guid: 42a1eafa5bdbd4b4fb5e2d716a8646fc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6439,13 +6439,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.54
-  m_fontSizeBase: 8.54
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
@@ -6626,7 +6626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.05, y: -2.15}
+  m_AnchoredPosition: {x: -0.05, y: -4.72}
   m_SizeDelta: {x: 20, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7315263550158286945
@@ -6645,8 +6645,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -2.9}
-  m_SizeDelta: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 1.12, y: -2.8999996}
+  m_SizeDelta: {x: 17.23, y: 21.5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &7405391164304593802
 GameObject:
@@ -6729,9 +6729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7126087e05c10474696e7c9e69cdf9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: f5a9af84e7f8be34b904e23dca335f07, type: 2}
-  spriteOn: {fileID: 7416660470128251321, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
-  spriteOff: {fileID: -6577226571599536343, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  itemData: {fileID: 11400000, guid: 1296464176a50fe4398c65a35a3b0aad, type: 2}
+  spriteOn: {fileID: -4119334708683220384, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  spriteOff: {fileID: -4119334708683220384, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
 --- !u!1 &7706561239798499630
 GameObject:
   m_ObjectHideFlags: 0

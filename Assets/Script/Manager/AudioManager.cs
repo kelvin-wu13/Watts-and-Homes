@@ -9,7 +9,18 @@ public class AudioManager : MonoBehaviour
     public AudioClip mainMenuBGM;
     public AudioClip gameBGM;
 
-    private AudioSource audioSource;
+    [Header("UI SFX Clips")]
+    public AudioClip uiClickSFX;
+    public AudioClip uiHoverSFX;
+
+    private AudioSource bgmSource;
+    private AudioSource sfxSource;
+
+    [Range(0f, 1f)] public float defaultBGMVolume = 0.7f;
+    [Range(0f, 1f)] public float defaultSFXVolume = 1f;
+
+    public float BGMVolume => bgmSource ? bgmSource.volume : defaultBGMVolume;
+    public float SFXVolume => sfxSource ? sfxSource.volume : defaultSFXVolume;
 
     private void Awake()
     {
@@ -17,8 +28,19 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.loop = true;
+
+            float bgm = PlayerPrefs.HasKey("BGM_VOLUME") ? PlayerPrefs.GetFloat("BGM_VOLUME") : defaultBGMVolume;
+            float sfx = PlayerPrefs.HasKey("SFX_VOLUME") ? PlayerPrefs.GetFloat("SFX_VOLUME") : defaultSFXVolume;
+            bgmSource.volume = Mathf.Clamp01(bgm);
+            sfxSource.volume = Mathf.Clamp01(sfx);
+
+            bgmSource = gameObject.AddComponent<AudioSource>();
+            bgmSource.loop = true;
+            bgmSource.playOnAwake = false;
+
+            sfxSource = gameObject.AddComponent<AudioSource>();
+            sfxSource.loop = false;
+            sfxSource.playOnAwake = false;
         }
         else
         {
@@ -42,19 +64,50 @@ public class AudioManager : MonoBehaviour
     {
         if (sceneName == "MainMenu")
         {
-            if (audioSource.clip != mainMenuBGM)
+            if (bgmSource.clip != mainMenuBGM)
             {
-                audioSource.clip = mainMenuBGM;
-                audioSource.Play();
+                bgmSource.clip = mainMenuBGM;
+                bgmSource.Play();
             }
         }
         else
         {
-            if (audioSource.clip != gameBGM)
+            if (bgmSource.clip != gameBGM)
             {
-                audioSource.clip = gameBGM;
-                audioSource.Play();
+                bgmSource.clip = gameBGM;
+                bgmSource.Play();
             }
         }
+    }
+
+    public void PlaySFX(AudioClip clip, float pitch = 1f)
+    {
+        if (clip == null) return;
+        sfxSource.pitch = pitch;
+        sfxSource.PlayOneShot(clip);
+        sfxSource.pitch = 1f;
+    }
+    public void SetBGMVolume(float v)
+    {
+        if (!bgmSource) return;
+        bgmSource.volume = Mathf.Clamp01(v);
+        PlayerPrefs.SetFloat("BGM_VOLUME", bgmSource.volume);
+    }
+
+    public void SetSFXVolume(float v)
+    {
+        if (!sfxSource) return;
+        sfxSource.volume = Mathf.Clamp01(v);
+        PlayerPrefs.SetFloat("SFX_VOLUME", sfxSource.volume);
+    }
+
+    public void PlayUIClick()
+    {
+        PlaySFX(uiClickSFX);
+    }
+
+    public void PlayUIHover()
+    {
+        PlaySFX(uiHoverSFX);
     }
 }

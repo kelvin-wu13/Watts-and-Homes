@@ -288,6 +288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuBGM: {fileID: 8300000, guid: 0b871da6e5f92cb4ea0ea4d8c6ad5b5d, type: 3}
   gameBGM: {fileID: 8300000, guid: f04bc3b4afd57df4092cc29e1cbf8823, type: 3}
+  uiClickSFX: {fileID: 0}
+  uiHoverSFX: {fileID: 0}
+  defaultBGMVolume: 0.7
+  defaultSFXVolume: 1
 --- !u!4 &345833120
 Transform:
   m_ObjectHideFlags: 0
@@ -315,6 +319,7 @@ GameObject:
   - component: {fileID: 474258806}
   - component: {fileID: 474258805}
   - component: {fileID: 474258804}
+  - component: {fileID: 474258807}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -435,6 +440,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474258802}
   m_CullTransparentMesh: 1
+--- !u!114 &474258807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474258802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6d7bef20ff99c4fa6004d9d7936896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickClip: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  hoverClip: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  playOnPointerDown: 0
+  volumeMultiplier: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &507792600
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +549,7 @@ GameObject:
   - component: {fileID: 905294393}
   - component: {fileID: 905294392}
   - component: {fileID: 905294391}
+  - component: {fileID: 905294394}
   m_Layer: 5
   m_Name: New Journey
   m_TagString: Untagged
@@ -646,6 +670,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905294389}
   m_CullTransparentMesh: 1
+--- !u!114 &905294394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905294389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6d7bef20ff99c4fa6004d9d7936896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickClip: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  hoverClip: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  playOnPointerDown: 0
+  volumeMultiplier: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &920487724
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +803,7 @@ GameObject:
   - component: {fileID: 972589877}
   - component: {fileID: 972589876}
   - component: {fileID: 972589875}
+  - component: {fileID: 972589878}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -881,6 +924,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972589873}
   m_CullTransparentMesh: 1
+--- !u!114 &972589878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972589873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6d7bef20ff99c4fa6004d9d7936896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickClip: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  hoverClip: {fileID: 8300000, guid: fdad52850949cfb4a9fa73000e4151bd, type: 3}
+  playOnPointerDown: 0
+  volumeMultiplier: 1
+  pitchMin: 1
+  pitchMax: 1
 --- !u!1 &1181667867
 GameObject:
   m_ObjectHideFlags: 0

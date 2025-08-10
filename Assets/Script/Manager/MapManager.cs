@@ -7,6 +7,17 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager Instance { get; private set; }
 
+    public Button specialButton;
+    public Image specialButtonImage;
+    public Sprite specialLockedSprite;
+    public Sprite specialUnlockedSprite;
+
+    public int starsRequiredToUnlock = 5;
+
+    public GameObject specialPopupPanel;
+    public Image specialPopupImage;
+    public Sprite comicSprite;
+
     [Header("Popup UI")]
     public GameObject levelPopupPanel;
     public TextMeshProUGUI levelTitleText;
@@ -62,6 +73,8 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        RefreshMapUI();
+        RefreshAllHouses();
         UpdateStarCounter();
         RefreshAllHouses();
 
@@ -80,6 +93,22 @@ public class MapManager : MonoBehaviour
         int earned = GameProgress.GetTotalStarsEarned(totalLevels);
         int total = totalLevels * 3;
         starCounterText.text = $"{earned}/{total}";
+    }
+    private void UpdateLockableButton()
+    {
+        if (specialButton == null || specialButtonImage == null) return;
+
+        int earned = GameProgress.GetTotalStarsEarned(totalLevels);
+        bool unlocked = earned >= starsRequiredToUnlock;
+
+        specialButton.interactable = unlocked;
+        if (specialLockedSprite && specialUnlockedSprite)
+            specialButtonImage.sprite = unlocked ? specialUnlockedSprite : specialLockedSprite;
+    }
+    public void RefreshMapUI()
+    {
+        UpdateStarCounter();
+        UpdateLockableButton();
     }
 
     private void OnMapEntryDialogueFinished()
@@ -233,6 +262,25 @@ public class MapManager : MonoBehaviour
     public void OnClick_BackToMainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuSceneName);
+    }
+    public void OnClick_SpecialButton()
+    {
+        blockerButton.gameObject.SetActive(true);
+        int earned = GameProgress.GetTotalStarsEarned(totalLevels);
+        if (earned < starsRequiredToUnlock) return;
+
+        if (specialPopupImage && comicSprite)
+            specialPopupImage.sprite = comicSprite;
+
+        if (specialPopupPanel)
+            specialPopupPanel.SetActive(true);
+    }
+
+    public void OnClick_SpecialClose()
+    {
+        blockerButton.gameObject.SetActive(false);
+        if (specialPopupPanel)
+            specialPopupPanel.SetActive(false);
     }
 
 }

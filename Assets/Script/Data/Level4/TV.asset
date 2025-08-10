@@ -17,4 +17,4 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   powerGeneration: 0
-  powerRequirement: 6
+  powerRequirement: 4
