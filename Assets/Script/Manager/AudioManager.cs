@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager Instance { get; private set; }
 
     [Header("BGM Clips")]
     public AudioClip mainMenuBGM;
@@ -29,23 +29,23 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+            if (!bgmSource)
+            {
+                bgmSource = gameObject.AddComponent<AudioSource>();
+                bgmSource.loop = true;
+                bgmSource.playOnAwake = false;
+            }
+            if (!sfxSource)
+            {
+                sfxSource = gameObject.AddComponent<AudioSource>();
+                sfxSource.loop = false;
+                sfxSource.playOnAwake = false;
+            }
+
             float bgm = PlayerPrefs.HasKey("BGM_VOLUME") ? PlayerPrefs.GetFloat("BGM_VOLUME") : defaultBGMVolume;
             float sfx = PlayerPrefs.HasKey("SFX_VOLUME") ? PlayerPrefs.GetFloat("SFX_VOLUME") : defaultSFXVolume;
             bgmSource.volume = Mathf.Clamp01(bgm);
             sfxSource.volume = Mathf.Clamp01(sfx);
-
-            bgmSource = gameObject.AddComponent<AudioSource>();
-            bgmSource.loop = true;
-            bgmSource.playOnAwake = false;
-
-            sfxSource = gameObject.AddComponent<AudioSource>();
-            sfxSource.loop = false;
-            sfxSource.playOnAwake = false;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
         }
     }
 
@@ -54,38 +54,41 @@ public class AudioManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         PlayBGMForScene(SceneManager.GetActiveScene().name);
     }
+    void OnDestroy()
+    {
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         PlayBGMForScene(scene.name);
     }
 
     private void PlayBGMForScene(string sceneName)
     {
-        if (sceneName == "MainMenu")
+        if (!bgmSource) return;
+
+        AudioClip target = (sceneName == "MainMenu") ? mainMenuBGM : gameBGM;
+        if (target == null)
         {
-            if (bgmSource.clip != mainMenuBGM)
-            {
-                bgmSource.clip = mainMenuBGM;
-                bgmSource.Play();
-            }
+            if (bgmSource.isPlaying) bgmSource.Stop();
+            bgmSource.clip = null;
+            return;
         }
-        else
-        {
-            if (bgmSource.clip != gameBGM)
-            {
-                bgmSource.clip = gameBGM;
-                bgmSource.Play();
-            }
-        }
+
+        if (bgmSource.clip == target && bgmSource.isPlaying) return;
+        bgmSource.clip = target;
+        bgmSource.Play();
     }
 
     public void PlaySFX(AudioClip clip, float pitch = 1f)
     {
-        if (clip == null) return;
+        if (clip == null || !sfxSource) return;
+        float oldPitch = sfxSource.pitch;
         sfxSource.pitch = pitch;
         sfxSource.PlayOneShot(clip);
-        sfxSource.pitch = 1f;
+        sfxSource.pitch = oldPitch;
     }
     public void SetBGMVolume(float v)
     {
