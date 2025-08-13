@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    public GameObject objectivePanel;
     public GameObject blockerPanel;
     public GameObject resultPanel;
     public TextMeshProUGUI titleText;
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
 
         PopulatePopupObjectiveList(objectiveListContainer, finalObjectives);
 
+        objectivePanel.SetActive(false);
         resultPanel.SetActive(true);
     }
     private void PopulatePopupObjectiveList(Transform container, List<Objective> objectives)
