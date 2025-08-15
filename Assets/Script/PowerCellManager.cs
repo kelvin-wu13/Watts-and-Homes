@@ -1,8 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PowerCellManager : MonoBehaviour
 {
+    public bool IsDragging { get; private set; } = false;
+
     [Header("Power Cell Settings")]
     public float snapDistance = 2f;
 
@@ -41,85 +43,66 @@ public class PowerCellManager : MonoBehaviour
     private bool IsCurrentlyBeingDragged()
     {
         if (GameManager.currentState != GameManager.GameState.Normal) return false;
-        if (!Mouse.current.leftButton.isPressed) return false;
+        if (Mouse.current == null) return false;
 
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
-        mouseWorldPos.z = 0;
+        // Saat sudah dragging, cukup tahan tombol kiri
+        if (wasDragging) return Mouse.current.leftButton.isPressed;
 
-        float distanceToMouse = Vector3.Distance(transform.position, mouseWorldPos);
-        return distanceToMouse < 1f;
+        // Mulai drag HANYA jika klik langsung di cell ini
+        var ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
+        var hit = Physics2D.GetRayIntersection(ray);
+        return hit.collider != null
+            && hit.collider.gameObject == gameObject
+            && Mouse.current.leftButton.isPressed;
     }
 
     private void OnStartDrag()
     {
-        transform.SetParent(null);
+        IsDragging = true;
 
-        originalPosition = transform.position;
-        wasInSlot = currentSlot != null;
-
-        PowerCell powerCell = GetComponent<PowerCell>();
-        if (powerCell != null)
-        {
-            powerCell.SetInSlot(false);
-        }
-
-        ConnectionPoint cp = GetComponent<ConnectionPoint>();
-        if (cp != null)
-        {
-            cp.enabled = true;
-        }
-
+        // kalau sedang di slot, lepas parent tapi TETAPKAN world transform
         if (currentSlot != null)
         {
-            currentSlot.RemovePowerCell();
+            var old = currentSlot;
             currentSlot = null;
+            old.RemovePowerCell();                 // fungsi lamamu
+            transform.SetParent(null, true);       // true = keep world pos/rot/scale
         }
+
+        var cp = GetComponent<ConnectionPoint>();
+        if (cp) cp.enabled = true;
     }
 
     private void OnDrag()
     {
+        // Pindahkan cell mengikuti kursor
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
+        mouseWorldPos.z = 0;
+        transform.position = mouseWorldPos;
+
+        // Feedback slot terdekat (punyamu sudah ada)
         ShowNearbySlotsFeedback();
     }
 
     private void OnEndDrag()
     {
-        ClearSlotsFeedback();
+        IsDragging = false;
 
-        SolarFrame[] frames = FindObjectsByType<SolarFrame>(FindObjectsSortMode.None);
-        bool placed = false;
-
-        foreach (SolarFrame frame in frames)
+        // Coba snap ke slot kosong terdekat jika cukup dekat
+        float bestDist = float.MaxValue;
+        PowerCellSlot best = null;
+        foreach (var frame in FindObjectsByType<SolarFrame>(FindObjectsSortMode.None))
         {
-            PowerCellSlot nearestSlot = frame.FindNearestEmptySlot(transform.position);
-            if (nearestSlot != null)
-            {
-                placed = nearestSlot.PlacePowerCell(this);
-                if (placed) break;
-            }
+            var slot = frame.FindNearestEmptySlot(transform.position);
+            if (slot == null) continue;
+            float d = Vector3.Distance(transform.position, slot.transform.position);
+            if (d < bestDist) { bestDist = d; best = slot; }
         }
+        if (best != null && bestDist <= snapDistance)
+            best.PlacePowerCell(this); // parent & snap (pakai logika kamu)
 
-        if (placed)
-        {
-            PowerCell powerCell = GetComponent<PowerCell>();
-            if (powerCell != null)
-            {
-                powerCell.SetInSlot(true);
-            }
-
-            ConnectionPoint cp = GetComponent<ConnectionPoint>();
-            if (cp != null)
-            {
-                cp.enabled = false;
-            }
-        }
-        else
-        {
-            PowerCell powercell = GetComponent<PowerCell>();
-            if (powercell != null)
-            {
-                powercell.SetInSlot(false);
-            }
-        }
+        var cp = GetComponent<ConnectionPoint>();
+        if (cp) cp.enabled = false;
     }
 
     private void ShowNearbySlotsFeedback()
@@ -136,25 +119,37 @@ public class PowerCellManager : MonoBehaviour
         }
     }
 
-    private void ClearSlotsFeedback()
-    {
-        PowerCellSlot[] allSlots = FindObjectsByType<PowerCellSlot>(FindObjectsSortMode.None);
-        foreach (PowerCellSlot slot in allSlots)
-        {
-            if (!slot.isOccupied)
-            {
-                slot.OnHoverExit();
-            }
-        }
-    }
+    //private void ClearSlotsFeedback()
+    //{
+    //    PowerCellSlot[] allSlots = FindObjectsByType<PowerCellSlot>(FindObjectsSortMode.None);
+    //    foreach (PowerCellSlot slot in allSlots)
+    //    {
+    //        if (!slot.isOccupied)
+    //        {
+    //            slot.OnHoverExit();
+    //        }
+    //    }
+    //}
     public void SetSlot(PowerCellSlot slot)
     {
         currentSlot = slot;
 
-        PowerCell powerCell = GetComponent<PowerCell>();
-        if (powerCell != null)
+        var powerCell = GetComponent<PowerCell>();
+        if (powerCell) powerCell.SetInSlot(slot != null);
+
+        if (slot != null)
         {
-            powerCell.SetInSlot(slot != null);
+            // simpan world-scale sebelum diparent
+            Vector3 worldScale = transform.lossyScale;
+
+            transform.SetParent(slot.transform, true);
+            transform.position = slot.transform.position;
+            transform.rotation = slot.transform.rotation;
+        }
+        else
+        {
+            // keluar dari slot → lepas parent, ukuran tetap
+            transform.SetParent(null, true);
         }
     }
 

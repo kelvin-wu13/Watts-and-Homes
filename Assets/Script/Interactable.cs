@@ -43,9 +43,13 @@ public class Interactable : MonoBehaviour
 
         if (isHovering && Mouse.current.leftButton.wasPressedThisFrame)
         {
+            if (GetComponent<SolarFrame>() != null && PointerOverChildPowerCell())
+                return;
+
             isDragging = true;
             offset = transform.position - GetMouseWorldPos();
         }
+
         if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
         {
             isDragging = false;
@@ -69,5 +73,22 @@ public class Interactable : MonoBehaviour
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         mousePos.z = 0;
         return mousePos;
+    }
+    bool PointerOverChildPowerCell()
+    {
+        Vector3 mp = mainCamera.ScreenToWorldPoint(
+            UnityEngine.InputSystem.Pointer.current.position.ReadValue()
+        );
+        mp.z = 0;
+
+        var hits = Physics2D.OverlapPointAll(mp);
+        foreach (var h in hits)
+        {
+            if (h == null) continue;
+
+            if (h.TryGetComponent<PowerCellManager>(out _) && h.transform.IsChildOf(transform))
+                return true;
+        }
+        return false;
     }
 }

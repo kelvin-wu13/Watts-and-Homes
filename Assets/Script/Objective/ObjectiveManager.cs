@@ -97,7 +97,7 @@ public class ObjectiveManager : MonoBehaviour
 
         if (UIManager.Instance != null)
         {
-            UIManager.Instance.ShowResultPanel(allComplete, objectives);
+            UIManager.Instance.ShowResultPanelDelayed(1.5f, allComplete, objectives);
         }
     }
 

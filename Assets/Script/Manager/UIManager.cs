@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -11,14 +11,21 @@ public class UIManager : MonoBehaviour
     public GameObject objectivePanel;
     public GameObject blockerPanel;
     public GameObject resultPanel;
-    public TextMeshProUGUI titleText;
+
     public Transform objectiveListContainer;
     public Button nextLevelButton;
     public Button restartButton;
 
     public GameObject popupObjectiveItemPrefab;
+
     public Sprite completedSprite;
     public Sprite incompleteSprite;
+
+    public Image resultStatusImage;
+    public Sprite successSprite;
+    public Sprite failSprite;
+
+    [SerializeField] float resultDelay = 1.5f;
 
     private void Awake()
     {
@@ -26,19 +33,43 @@ public class UIManager : MonoBehaviour
         else { Destroy(gameObject); }
 
         if (resultPanel != null) resultPanel.SetActive(false);
-        if (blockerPanel != null) resultPanel.SetActive(false);
+        if (blockerPanel != null) blockerPanel.SetActive(false);
     }
 
     public void ShowResultPanel(bool wasSuccessful, List<Objective> finalObjectives)
     {
         if (resultPanel == null) return;
 
-        blockerPanel.SetActive(true);
+        int completed = 0;
+        if (finalObjectives != null)
+        {
+            for (int i = 0; i < finalObjectives.Count; i++)
+                if (finalObjectives[i] != null && finalObjectives[i].IsComplete)
+                    completed++;
+        }
+        bool success = completed >= 1;
+
+        if (resultStatusImage != null)
+        {
+            resultStatusImage.sprite = success ? successSprite : failSprite;
+            resultStatusImage.enabled = (resultStatusImage.sprite != null);
+        }
 
         PopulatePopupObjectiveList(objectiveListContainer, finalObjectives);
 
-        objectivePanel.SetActive(false);
+        if (blockerPanel) blockerPanel.SetActive(true);
+        if (objectivePanel) objectivePanel.SetActive(false);
         resultPanel.SetActive(true);
+    }
+    public void ShowResultPanelDelayed(float delay, bool wasSuccessful, List<Objective> finalObjectives)
+    {
+        StartCoroutine(ShowResultPanelDelayedCo(delay, wasSuccessful, finalObjectives));
+    }
+
+    private IEnumerator ShowResultPanelDelayedCo(float delay, bool wasSuccessful, List<Objective> finalObjectives)
+    {
+        yield return new WaitForSeconds(delay);
+        ShowResultPanel(wasSuccessful, finalObjectives);
     }
     private void PopulatePopupObjectiveList(Transform container, List<Objective> objectives)
     {

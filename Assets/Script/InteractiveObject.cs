@@ -1,88 +1,105 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class InteractiveObject : MonoBehaviour
 {
+    [Header("Spawn Settings")]
     public GameObject itemPrefab;
     public string slotId;
 
     private Camera mainCamera;
 
+    // Preview & kepemilikan global (agar instance lain tidak ikut handle)
     private static GameObject previewInstance;
     private static InteractiveObject activeOwner;
+
+    private enum DragState { Idle, WaitingForPress, Dragging }
+    private static DragState state = DragState.Idle;
 
     private void Start()
     {
         mainCamera = Camera.main;
     }
 
+    // PANGGIL INI dari OnPointerDown (ideal) atau OnClick (masih didukung)
     public void OnPress()
     {
-        if (InventoryManager.Instance && !InventoryManager.Instance.CanUse(slotId)) return;
+        // Cek stok lebih dulu
+        if (InventoryManager.Instance && !InventoryManager.Instance.CanUse(slotId))
+        {
+            Debug.Log($"[InteractiveObject] {slotId} stok habis.");
+            return;
+        }
 
-        if (previewInstance != null) Destroy(previewInstance);
+        // Reset preview lama & set owner
+        if (previewInstance) Destroy(previewInstance);
         activeOwner = this;
 
-        if (previewInstance != null) Destroy(previewInstance);
+        // Buat preview
         previewInstance = Instantiate(itemPrefab);
+        if (previewInstance && !previewInstance.activeSelf) previewInstance.SetActive(true);
         SetupPreviewAppearance(previewInstance);
-        Debug.Log($"[InteractiveObject] OnPress slotId='{slotId}'");
-    }
-    private void SetupPreviewAppearance(GameObject preview)
-    {
-        var spriteRenderer = preview.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
-        }
 
-        var collider = preview.GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            collider.enabled = false;
-        }
+        // Posisi awal
+        if (previewInstance) previewInstance.transform.position = GetMouseWorldPos();
 
-        var canvasComponents = preview.GetComponentsInChildren<Canvas>();
-        foreach (var canvas in canvasComponents)
-        {
-            var canvasGroup = canvas.GetComponent<CanvasGroup>();
-            if (canvasGroup == null)
-            {
-                canvasGroup = canvas.gameObject.AddComponent<CanvasGroup>();
-            }
-            canvasGroup.alpha = 0.5f;
-        }
+        // Jika dipanggil via OnPointerDown: tombol sudah pressed → langsung dragging
+        // Jika via OnClick: tombol sudah released → tunggu press berikutnya
+        state = (Mouse.current != null && Mouse.current.leftButton.isPressed)
+              ? DragState.Dragging
+              : DragState.WaitingForPress;
+
+        Debug.Log($"[InteractiveObject] Start drag slotId='{slotId}' | state={state}");
     }
 
     private void Update()
     {
-        if (activeOwner != this) return;
+        // Hanya owner yang boleh meng-handle
+        if (activeOwner != this || previewInstance == null) return;
 
-        if (previewInstance != null)
+        // Batal dengan ESC / Right Click
+        if ((Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) ||
+             (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame))
         {
-            previewInstance.transform.position = GetMouseWorldPos();
+            CancelDrag();
+            return;
+        }
 
-            if (Mouse.current.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
-            {
-                PlaceObject();
-            }
-            if (Mouse.current.rightButton.wasPressedThisFrame)
-            {
-                Destroy(previewInstance);
-                previewInstance = null;
-            }
+        // Gerakkan preview
+        previewInstance.transform.position = GetMouseWorldPos();
+
+        // State machine drag & drop
+        if (Mouse.current == null) return;
+
+        switch (state)
+        {
+            case DragState.WaitingForPress:
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                    state = DragState.Dragging;
+                break;
+
+            case DragState.Dragging:
+                if (Mouse.current.leftButton.wasReleasedThisFrame)
+                {
+                    // Jangan place kalau lepas di atas UI
+                    if (!EventSystem.current || !EventSystem.current.IsPointerOverGameObject())
+                        PlaceObject();
+                    else
+                        CancelDrag();
+                }
+                break;
         }
     }
 
     private void PlaceObject()
     {
-        // finalize visual
-        var spriteRenderer = previewInstance.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null) spriteRenderer.color = Color.white;
+        // Finalize visual (aktifkan collider & opacity)
+        var sr = previewInstance.GetComponent<SpriteRenderer>();
+        if (sr) sr.color = Color.white;
 
-        var collider = previewInstance.GetComponent<Collider2D>();
-        if (collider != null) collider.enabled = true;
+        var col = previewInstance.GetComponent<Collider2D>();
+        if (col) col.enabled = true;
 
         foreach (var canvas in previewInstance.GetComponentsInChildren<Canvas>())
         {
@@ -90,10 +107,9 @@ public class InteractiveObject : MonoBehaviour
             if (cg) cg.alpha = 1f;
         }
 
-        // konsumsi slot utk owner saat ini
-        bool ok = true;
-        if (InventoryManager.Instance)
-            ok = InventoryManager.Instance.Consume(slotId, previewInstance);
+        // Konsumsi slot (limit)
+        bool ok = InventoryManager.Instance ?
+                  InventoryManager.Instance.Consume(slotId, previewInstance) : true;
 
         if (!ok)
         {
@@ -101,14 +117,44 @@ public class InteractiveObject : MonoBehaviour
             Destroy(previewInstance);
         }
 
-        // selesai
+        // Selesai
         previewInstance = null;
         activeOwner = null;
+        state = DragState.Idle;
     }
+
+    private void CancelDrag()
+    {
+        if (previewInstance) Destroy(previewInstance);
+        previewInstance = null;
+        activeOwner = null;
+        state = DragState.Idle;
+    }
+
+    private void SetupPreviewAppearance(GameObject go)
+    {
+        if (!go) return;
+
+        var sr = go.GetComponent<SpriteRenderer>();
+        if (sr) { var c = sr.color; c.a = 0.5f; sr.color = c; }
+
+        var col = go.GetComponent<Collider2D>();
+        if (col) col.enabled = false;
+
+        foreach (var canvas in go.GetComponentsInChildren<Canvas>())
+        {
+            var cg = canvas.GetComponent<CanvasGroup>();
+            if (!cg) cg = canvas.gameObject.AddComponent<CanvasGroup>();
+            cg.alpha = 0.5f;
+        }
+    }
+
     private Vector3 GetMouseWorldPos()
     {
-        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Pointer.current.position.ReadValue());
-        mousePos.z = 0;
-        return mousePos;
+        var mp = mainCamera.ScreenToWorldPoint(
+            Pointer.current != null ? Pointer.current.position.ReadValue() : Input.mousePosition
+        );
+        mp.z = 0;
+        return mp;
     }
 }
