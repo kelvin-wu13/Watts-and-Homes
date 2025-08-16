@@ -592,7 +592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -265}
+  m_AnchoredPosition: {x: -35.999878, y: -265}
   m_SizeDelta: {x: 750, y: 1000}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &162295402
@@ -667,28 +667,28 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Panel ini akan menjaga lampu menyala setiap malam selama siangnya ada sinar
-      matahari.
+    text: The panels will keep the lamps powered each night as long as there is sunlight
+      during the day.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Dan tidak perlu bayar apa pun untuk memakainya.
+    text: And you will not have to pay anything to use them.
   - speaker: 1
     slot: 3
     characterSprite: {fileID: -6309751181433986704, guid: b0bcc8a6889b8b340bbd7d4b5a84955b, type: 3}
     characterNameplate: {fileID: -6470460504253458178, guid: d3741a9a1a0aa424096b945d957bbf57, type: 3}
-    text: Terima kasih. Malam kami akan jauh lebih mudah sekarang.
+    text: Thank you. This will make our nights much easier.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -1237030800083685917, guid: b0bcc8a6889b8b340bbd7d4b5a84955b, type: 3}
     characterNameplate: {fileID: 6937817954938267909, guid: 0e91e48d0ffd32d49adf02e4aa075e5a, type: 3}
-    text: Kami sangat berterima kasih.
+    text: We are grateful. Fi will sleep more peacefully now.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Senang sekali bisa membantu.
+    text: We are happy to help.
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -742,104 +742,98 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Selamat sore, Kepala Desa Mawang.
+    text: Good afternoon, Chief Mawang.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: "Ah\u2026 tamu rupanya. Selamat datang di Desa Walawe. Jarang sekali ada
-      wajah baru di sini."
+    text: "Ah\u2026 visitors. Welcome to Village Walawe. We don\u2019t often see
+      new faces here."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Perjalanannya cukup jauh, tapi tempat ini indah sekali.
+    text: "It\u2019s a long journey, but this place is beautifu"
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: "Heh\u2026 hutan ini sudah menjaga kami dengan baik. Jadi, ada perlu apa
-      kalian kemari?"
+    text: "Heh\u2026 the forest keeps us well. Now, what brings you here?"
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Nama saya Kevin, ini Adi. Kami relawan dari program mahasiswa yang bekerja
-      sama dengan desa-desa untuk membawa energi bersih.
+    text: "I\u2019m Kevin, and this is Adi. We\u2019re volunteers from a student
+      program that works with villages to bring clean energy."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kelompok kami mendapat sumbangan peralatan tenaga surya, dan kami ke sini
-      untuk membantu memasangnya di tempat-tempat yang membutuhkan.
+    text: "Our group received some donated solar equipment, and we\u2019re here to
+      help set it up for communities that need it most."
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: "Hmm\u2026 jadi kalian mau memasangnya di sini?"
+    text: "Hmm\u2026 and you wish to put it here?"
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Betul. Rencananya kami ingin membuat sistem panel surya besar supaya seluruh
-      desa bisa berbagi listrik.
+    text: Yes, we planned to build a solar array system so the whole village could
+      share power.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Saya harus menolak. Sistem besar bisa mengganggu hutan, dan hutan ini harus
-      kami jaga.
+    text: I must refuse. A large system could disturb the forest, and we protect
+      it above all.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Saya mengerti. Bagaimana kalau mulai dari yang kecil saja, kami kunjungi
-      rumah satu per satu, pasang sistem surya kecil di masing-masing rumah? Tidak
-      ada pembangunan besar, dan tidak akan mengganggu hutan.
+    text: I understand. What if we start smaller, visit each house one by one, and
+      install a small solar setup for them? No big construction, no risk to the forest
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: "Kalau begitu\u2026 bagaimana biayanya? Apakah warga saya harus bayar untuk
-      memakainya?"
+    text: What about the cost? Will my people have to pay to use it?
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: 'Tidak, Pak. Peralatannya hasil sumbangan. Setelah terpasang, listriknya
-      dari sinar matahari. Tidak ada biaya, dan tahan lama.
-
-'
+    text: "No, Chief. The equipment was donated, and once it\u2019s set up, it runs
+      on sunlight. There\u2019s nothing to pay for, and it lasts a long time."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Tapi kami harus mengatur persediaan dengan hati-hati karena yang kami bawa
-      terbatas.
+    text: "We\u2019ll have to manage our supplies carefully, since what we brought
+      is limited."
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: " \u2026Itu bisa diterima. Hutannya tetap aman. Kalian tahu sendiri, di
-      sini ada juga beberapa warga yang punya senter atau barang kecil.Tapi kalau
-      habis dayanya, mereka harus jalan ke warung listrik di desa sebelah. Jauh,
-      dan mahal hanya untuk sedikit daya."
+    text: "\u2026That is very acceptable. The forest remains safe, and you know that
+      some folks here have maybe a flashlight or small gadget. But when it runs out,
+      they have to walk to a small charging shop in the next village. All that way,
+      just for a bit of power and it\u2019s not cheap."
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Terima kasih, Pak. Dari rumah mana sebaiknya kami mulai?
+    text: Thank you, Chief. Where should we begin?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Mulailah dari rumahnya Pincen. Dia kesulitan dapat penerangan di malam
-      hari.
+    text: "Start with Pincen\u2019s house. He\u2019s had trouble with light at night."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Baik. Ayo kita ke sana, Kevin.
+    text: "Alright. let\u2019s head there first, Kevin."
   playOnStart: 1
   playOnce: 0
   playOncePersistent: 1
@@ -1860,22 +1854,22 @@ MonoBehaviour:
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Luar biasa. Ruangan jadi terasa lebih sejuk dan terang.
+    text: Wonderful. The room already feels cooler and brighter.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Anak-anak pasti akan senang di esok hari.
+    text: The children will surely be happy tomorrow.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Kalian sudah membuat sekolah ini lebih baik dari sebelumnya.
+    text: "You\u2019ve made this school better than before."
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kami senang bisa membantu.
+    text: "We\u2019re glad we could help."
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -2252,50 +2246,48 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Selamat sore. Apakah ini rumah Rian dan Arra?
+    text: Good afternoon. Are you Rian and Arra?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -1237030800083685917, guid: b0bcc8a6889b8b340bbd7d4b5a84955b, type: 3}
     characterNameplate: {fileID: 6937817954938267909, guid: 0e91e48d0ffd32d49adf02e4aa075e5a, type: 3}
-    text: Betul. Kalian pasti orang yang disebut Kepala Desa.
+    text: Yes, that is us. You must be the ones Chief Mawang mentioned.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kami datang untuk membantu memasang sistem panel surya kecil di rumah Bapak
-      dan Ibu.
+    text: We are here to help set up a small solar system for your home.
   - speaker: 1
     slot: 3
     characterSprite: {fileID: -6309751181433986704, guid: b0bcc8a6889b8b340bbd7d4b5a84955b, type: 3}
     characterNameplate: {fileID: -6470460504253458178, guid: d3741a9a1a0aa424096b945d957bbf57, type: 3}
-    text: Kami punya beberapa lampu, tapi cepat mati kalau dayanya habis.
+    text: We only have a few lamps, but they do not stay on for long without power.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Berapa lampu yang biasanya dipakai?
+    text: How many lamps do you use?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -1237030800083685917, guid: b0bcc8a6889b8b340bbd7d4b5a84955b, type: 3}
     characterNameplate: {fileID: 6937817954938267909, guid: 0e91e48d0ffd32d49adf02e4aa075e5a, type: 3}
-    text: Dua di dalam rumah. Malam hari jadi terlalu gelap, apalagi kalau Arra sedang
-      mengurus Fi, bayi kami.
+    text: Two, inside the house. At night it gets too dark to move around, especially
+      when Arra is caring for Fi, our baby.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kami bisa pasang sistem yang cukup untuk menyalakan tiga lampu setelah
-      matahari terbenam.
+    text: We can give you a setup that will power all three lamps after sunset.
   - speaker: 1
     slot: 3
     characterSprite: {fileID: -6309751181433986704, guid: b0bcc8a6889b8b340bbd7d4b5a84955b, type: 3}
     characterNameplate: {fileID: -6470460504253458178, guid: d3741a9a1a0aa424096b945d957bbf57, type: 3}
-    text: Wah, itu akan sangat membantu
+    text: That would help a lot.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Kalau begitu, mari kita mulai.
+    text: Then let us get started.
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -3145,57 +3137,56 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Selamat sore, Pak. Apakah Bapak Pincen?
+    text: Good afternoon, sir. Are you Mr. Pincen?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: Betul. Kalian pasti orang yang disebut Kepala Desa.
+    text: "That\u2019s me. You\u2019re the new faces Chief mentioned?"
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Iya, Pak. Kami datang untuk membantu memasang panel surya kecil di rumah-rumah
-      warga.
+    text: "Yes. We\u2019re here to help bring small solar setups to the village."
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Ini bagian dari kerja sukarela kami. Tujuannya, setiap rumah punya sedikit
-      listrik bersih.
+    text: "It\u2019s part of our volunteer work. The idea is to give each house a
+      bit of clean electricity."
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: "Hmm\u2026 saya sih sudah biasa tanpa listrik."
+    text: "Hmm\u2026 I\u2019ve lived fine without it."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kenapa begitu, Pak?
+    text: Why is that?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: Satu-satunya cara untuk isi daya itu harus jalan jauh ke warung listrik
-      di desa sebelah. Jauh, dan mahal. Tidak sepadan. Lagi pula, cahaya bulan sudah
-      cukup buat saya di malam hari.
+    text: "The only way to charge it is to walk far to a charging shop in the next
+      village, it\u2019s kinda far and the price is too high. Not worth the trouble.
+      Also the moon\u2019s enough light for me at night."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kami mengerti. Tapi sedikit daya bisa mempermudah banyak hal.
+    text: We understand, but even a little power can make certain things easier.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Dengan panel surya, Bapak bisa punya penerangan tanpa perlu bayar atau
-      jalan jauh.
+    text: And with a solar setup, you can have light without paying or walking far..
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: Kalau memang kecil saja dan kalian sudah punya barangnya, ya silakan.
+    text: "Well\u2026 if it\u2019s that small and you already have it, I don\u2019t
+      mind you setting it up."
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -3960,17 +3951,17 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Wah, sudah selesai nih.
+    text: "Alright, it\u2019s done."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Kipasnya pasti bermanfaat buat Pak Tipen nanti malam.
+    text: The fan will surely be useful for Mr. Tipen tonight.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Betul. Dia akan senang sekali begitu mengetahuinya.
+    text: "Exactly. He\u2019ll be very happy when he finds out."
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -4405,49 +4396,50 @@ MonoBehaviour:
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: "Iya\u2026 mungkin pemiliknya sedang keluar. Kita lanjut saja ke rumah
-      berikutnya."
+    text: "Yeah\u2026 maybe the owner is out. Let\u2019s just move on to the next
+      house."
   - speaker: 1
     slot: 0
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Hei, kalian berdua!
-  - speaker: 0
-    slot: 0
-    characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
-    characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Oh, Pak Mawang. Ini rumah siapa, Pak?
-  - speaker: 1
-    slot: 2
-    characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
-    characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Rumah Tipen. Dia pekerja keras, biasanya pulang larut.
-  - speaker: 0
-    slot: 1
-    characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
-    characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Pantas saja kosong.
-  - speaker: 1
-    slot: 2
-    characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
-    characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: 'Tipen orangnya sederhana. Dia tidur cepat, jadi tidak terlalu butuh lampu. '
-  - speaker: 1
-    slot: 2
-    characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
-    characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Mungkin kipas angin saja sudah lebih dari cukup, dia sering berkeringatan
-      soalnya.
+    text: Hey, you two!
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Kalau begitu, kita pasang saja panel khusus untuk kipasnya.
+    text: Oh, Mr. Mawang. Whose house is this?
+  - speaker: 1
+    slot: 2
+    characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
+    characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
+    text: "This is Tipen\u2019s house. He\u2019s a hard worker, usually comes home
+      late."
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Ya, kita buat sebagai kejutan untuk dia.
+    text: "No wonder it\u2019s empty."
+  - speaker: 1
+    slot: 2
+    characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
+    characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
+    text: "Tipen is a simple man. He goes to bed early, so he doesn\u2019t really
+      need lights."
+  - speaker: 1
+    slot: 2
+    characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
+    characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
+    text: Maybe just a fan would be enough, since he often sweats a lot.
+  - speaker: 0
+    slot: 0
+    characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
+    characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
+    text: "In that case, let\u2019s install a panel just for the fan."
+  - speaker: 0
+    slot: 1
+    characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
+    characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
+    text: "Yeah, let\u2019s make it a surprise for him."
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -4588,53 +4580,53 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Selamat sore lagi, Kepala Desa Mawang.
+    text: Good afternoon again, Chief Mawang.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Ah, Kevin dan Adi. Sepertinya kalian sibuk membantu warga lain.
+    text: Ah, Kevin and Adi. I see you have been busy helping the others.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Betul, dan sekarang kami ingin membantu Bapak juga.
+    text: Yes, and now we would like to help you as well.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: 
+    text: Just name it.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: "Hmm\u2026 saya tidak terlalu memikirkan untuk punya sendiri."
+    text: "Hm\u2026 I did not think much about having one for myself."
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Kira-kira, di rumah Bapak apa saja yang paling dibutuhkan?
+    text: What would be most useful for you at home?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Satu lampu untuk malam hari, TV untuk berita, dan untuk mengisi daya ponsel
-      supaya bisa menghubungi orang di luar desa.
+    text: One light for the evenings, a TV for the news, and to keep my phone charged
+      so I can contact people outside the village.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Itu mudah. Kami bisa pasang sistem yang mampu menyalakan semua itu.
+    text: That is simple. We can make a system that will handle all of that easily.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Kalau persediaan kalian cukup, saya terima.
+    text: Very well. If you have enough supplies, I will accept it.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Cukup, Pak. Mari kita mulai.
+    text: We do. Let us get started.
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -4722,35 +4714,35 @@ MonoBehaviour:
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: "Jadi\u2026 ini sudah nyala?"
+    text: "So\u2026 it works already?"
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Sudah. Siang hari panelnya simpan tenaga, malamnya lampu di rumah Bapak
-      bisa menyala.
+    text: Yes. The panels will store sunlight during the day and power that light
+      bulb in your house at night.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Bapak bisa pakai kapan saja tanpa biaya. Tinggal biarkan kena matahari
-      di siang hari, malamnya siap dipakai.
+    text: You can use it whenever you need without paying anything. Just charge it
+      during the day and it will be ready at night.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: "Hmm\u2026 sederhana juga. Setidaknya saya tidak perlu bawa-bawa lampu
-      minyak lagi di dalam rumah."
+    text: 'Hmm... Simple enough. I suppose it will help me see inside without carrying
+      my old lamp around. '
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Kami senang Bapak mau mencobanya.
+    text: We are glad you are willing to try it.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -5405147182075140633, guid: 4a555bd955473224abfd5512bafec8bc, type: 3}
-    text: Terima kasih. Nanti saya lihat bagaimana hasilnya.
+    text: Well, thank you. I will see how it goes.
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -6299,29 +6291,29 @@ MonoBehaviour:
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Ini pertama kalinya saya melihat rumah sendiri seterang ini.
+    text: So this is my first time seeing my own home lit like this.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Ini akan bermanfaat. Saya bisa mengikuti berita dan berhubungan dengan
-      orang lain tanpa khawatir soal listrik.
+    text: This will be useful. I can follow the news and speak to others without
+      worrying about power.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: 0}
     characterNameplate: {fileID: 0}
-    text: Kami senang itu akan mempermudah Bapak.
+    text: We are glad it will make things easier for you, Chief.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Dan kami berterima kasih Bapak sudah mengizinkan kami bekerja di desa ini.
+    text: And we are thankful you allowed us to work here in the village.
   - speaker: 1
     slot: 2
     characterSprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -855298285791758126, guid: 4102bd5c6c3fbcf4e8491c4fad3d3534, type: 3}
-    text: Kalian selalu diterima di Desa Walawe. Apa yang kalian lakukan di sini
-      akan dikenang.
+    text: You are always welcome in Village Walawe. What you have done here will
+      be remembered.
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
@@ -6763,48 +6755,49 @@ MonoBehaviour:
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Halo. Anda pasti Bu Rena, guru di sini?
+    text: Hello. You must be Ms. Rena, the teacher here?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Betul. Kalian yang membawa panel surya itu, kan?
+    text: "That\u2019s right. You\u2019re the ones bringing the solar panels, aren\u2019t
+      you?"
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: Iya, Bu. Kami ingin tahu apa saja kebutuhan sekolah ini.
+    text: "Yes, Ma\u2019am. We\u2019d like to know what the school needs."
   - speaker: 1
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Kami butuh lampu untuk kelas, kipas untuk hari panas, TV untuk pelajaran,
-      dan juga cara untuk isi daya ponsel saya.
+    text: We need lights for the classroom, a fan for hot days, a TV for lessons,
+      and also a way to charge my phone.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Berapa lampu yang dibutuhkan?
+    text: How many lights are needed?
   - speaker: 1
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Tiga di dalam kelas.
+    text: Three inside the classroom.
   - speaker: 0
     slot: 1
     characterSprite: {fileID: -6060587507243506945, guid: 0b1aba0a23ad2f84493d5245e9891843, type: 3}
     characterNameplate: {fileID: -2966200626249415253, guid: fd5c1def86cfe944aa0d033429a6bf41, type: 3}
-    text: TV-nya akan dipakai untuk belajar, tapi tetap menyenangkan.
+    text: The TV will be used for learning, but also for fun.
   - speaker: 0
     slot: 0
     characterSprite: {fileID: -4070355687674959437, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
     characterNameplate: {fileID: -5223879580551219335, guid: ce0cab93a7a943e49a9e5f031c844e41, type: 3}
-    text: Baik, kami akan pasang sistem yang sanggup menyalakan semuanya.
+    text: "Alright, we\u2019ll set up a system that can power everything."
   - speaker: 1
     slot: 2
     characterSprite: {fileID: 7016964481559670577, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
     characterNameplate: {fileID: -4178046375966092550, guid: 3556e256bb16d694fa51aaa51d7e5b57, type: 3}
-    text: Terima kasih. Ini akan sangat membantu anak-anak.
+    text: Thank you. This will really help the children.
   playOnStart: 0
   playOnce: 0
   playOncePersistent: 0
