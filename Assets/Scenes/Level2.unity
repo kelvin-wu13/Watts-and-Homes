@@ -228,6 +228,10 @@ MonoBehaviour:
   lineColor: {r: 1, g: 0.48103228, b: 0, a: 1}
   lineWidth: 0.2
   cableSortingOrder: -1
+  cableCursorSprite: {fileID: 7084060711741569152, guid: 4ee40fa0b50fe194787fecd85234f306, type: 3}
+  cursorIconScale: 0.1
+  cursorIconColor: {r: 1, g: 1, b: 1, a: 0.6}
+  cursorIconSortingOrder: 100
   connectableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1010,6 +1014,7 @@ MonoBehaviour:
   resultStatusImage: {fileID: 115791589}
   successSprite: {fileID: 5117738753964456976, guid: 91e40f650a69be5479993ec452c8b1ea, type: 3}
   failSprite: {fileID: 3678257039456397277, guid: 91e40f650a69be5479993ec452c8b1ea, type: 3}
+  resultDelay: 1.5
 --- !u!4 &1096130479
 Transform:
   m_ObjectHideFlags: 0
@@ -3030,8 +3035,8 @@ MonoBehaviour:
   tutorialPanel: {fileID: 3387995301588455629}
   tutorialImage: {fileID: 279214592669014533}
   tutorialPages:
-  - {fileID: -4425806449190991492, guid: e895175026e97414bbfa002b5b927691, type: 3}
-  - {fileID: 5545074057135662542, guid: 91fed5584ec1f314ba29942f1babe358, type: 3}
+  - {fileID: -2849013625483036478, guid: e7528e446189e9b4aa54e244f1944d55, type: 3}
+  - {fileID: 4616448239136200218, guid: 121df7c46b0ea6449a731ee2d41fdfc9, type: 3}
   loopPages: 1
   hideWhileTutorial:
   - {fileID: 3210131248438819527}
@@ -6407,6 +6412,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 1296464176a50fe4398c65a35a3b0aad, type: 2}
   spriteOn: {fileID: -4119334708683220384, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
   spriteOff: {fileID: -4119334708683220384, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  highlightColor: {r: 1, g: 1, b: 0.6, a: 1}
+  invalidHighlightColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &7706561239798499630
 GameObject:
   m_ObjectHideFlags: 0

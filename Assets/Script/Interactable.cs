@@ -11,6 +11,7 @@ public class Interactable : MonoBehaviour
 
     private bool isHovering = false;
     private bool isDragging = false;
+    private bool externalHighlight = false;
     private Vector3 offset;
 
     void Start()
@@ -22,24 +23,17 @@ public class Interactable : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.currentState != GameManager.GameState.Normal) return;
+        bool canDrag = (GameManager.currentState == GameManager.GameState.Normal);
 
-        RaycastHit2D hit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue()));
+        RaycastHit2D hit = Physics2D.GetRayIntersection(
+            mainCamera.ScreenPointToRay(UnityEngine.InputSystem.Pointer.current.position.ReadValue())
+        );
         bool mouseIsOver = (hit.collider != null && hit.collider.gameObject == this.gameObject);
 
-        if (mouseIsOver && !isHovering)
-        {
-            isHovering = true;
-            if (hoverSprite != null)
-            {
-                spriteRenderer.sprite = hoverSprite;
-            }
-        }
-        else if (!mouseIsOver && isHovering)
-        {
-            isHovering = false;
-            spriteRenderer.sprite = originalSprite;
-        }
+        isHovering = mouseIsOver;
+        ApplyHighlightVisual(isHovering || externalHighlight);
+
+        if (!canDrag) return;
 
         if (isHovering && Mouse.current.leftButton.wasPressedThisFrame)
         {
@@ -51,13 +45,11 @@ public class Interactable : MonoBehaviour
         }
 
         if (isDragging && Mouse.current.leftButton.wasReleasedThisFrame)
-        {
             isDragging = false;
-        }
+
         if (isDragging)
-        {
             transform.position = GetMouseWorldPos() + offset;
-        }
+
         if (isHovering && Mouse.current.rightButton.wasPressedThisFrame)
         {
             var tag = GetComponent<SpawnedItemTag>();
@@ -73,6 +65,17 @@ public class Interactable : MonoBehaviour
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         mousePos.z = 0;
         return mousePos;
+    }
+    public void SetExternalHighlight(bool on)
+    {
+        externalHighlight = on;
+        ApplyHighlightVisual(externalHighlight || isHovering);
+    }
+
+    private void ApplyHighlightVisual(bool highlighted)
+    {
+        if (!spriteRenderer) return;
+        spriteRenderer.sprite = (highlighted && hoverSprite != null) ? hoverSprite : originalSprite;
     }
     bool PointerOverChildPowerCell()
     {

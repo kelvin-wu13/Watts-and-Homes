@@ -14,6 +14,12 @@ public class CablePlacer : MonoBehaviour
     public float lineWidth = 0.5f;
     public int cableSortingOrder = -1;
 
+    [Header("Cursor Indicator")]
+    public Sprite cableCursorSprite;
+    public float cursorIconScale = 1f;
+    public Color cursorIconColor = new Color(1f, 1f, 1f, 0.6f);
+    public int cursorIconSortingOrder = 100;
+
     [Header("Interaction")]
     public LayerMask connectableLayer;
     public Color previewColor = new Color(1f, 1f, 1f, 0.5f);
@@ -25,8 +31,13 @@ public class CablePlacer : MonoBehaviour
     public static CablePlacer Instance;
 
     private PlacementState currentState = PlacementState.Idle;
+    private Target hoveredTarget;
+    private ConnectionPoint hoveredPoint;
+    private Interactable hoveredInteractable;
     private LineRenderer currentLine;
     private ConnectionPoint firstConnectionPoint;
+    private Transform cursorIcon;
+    private SpriteRenderer cursorIconSR;
     private Camera mainCamera;
 
     void Awake()
@@ -56,6 +67,7 @@ public class CablePlacer : MonoBehaviour
         currentLine.sortingOrder = cableSortingOrder;
 
         currentState = PlacementState.WaitingForFirstPoint;
+        ShowCursorIcon();
     }
 
     private void Update()
@@ -83,6 +95,11 @@ public class CablePlacer : MonoBehaviour
             currentLine.SetPosition(1, mousePos);
         }
 
+        if (cursorIcon != null) cursorIcon.position = mousePos;
+        UpdateInteractableHighlight(mousePos);
+        UpdateHoveredPoint(mousePos);
+
+
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Ray cameraRay = mainCamera.ScreenPointToRay(Pointer.current.position.ReadValue());
@@ -96,6 +113,91 @@ public class CablePlacer : MonoBehaviour
                 }
             }
         }
+    }
+    void UpdateInteractableHighlight(Vector3 mousePos)
+    {
+        int mask = (connectableLayer.value == 0) ? Physics2D.AllLayers : connectableLayer.value;
+        var col = Physics2D.OverlapPoint(mousePos, mask);
+        Interactable next = col ? col.GetComponent<Interactable>() : null;
+
+        if (hoveredInteractable == next) return;
+
+        if (hoveredInteractable) hoveredInteractable.SetExternalHighlight(false);
+        hoveredInteractable = next;
+        if (hoveredInteractable) hoveredInteractable.SetExternalHighlight(true);
+    }
+
+    void ClearInteractableHighlight()
+    {
+        if (hoveredInteractable)
+        {
+            hoveredInteractable.SetExternalHighlight(false);
+            hoveredInteractable = null;
+        }
+    }
+    void UpdateHoveredPoint(Vector3 mousePos)
+    {
+        int mask = (connectableLayer.value == 0) ? Physics2D.AllLayers : connectableLayer.value;
+        var col = Physics2D.OverlapPoint(mousePos, mask);
+        ConnectionPoint next = col ? col.GetComponent<ConnectionPoint>() : null;
+
+        if (hoveredPoint == next) return;
+        hoveredPoint = next;
+
+        UpdateTargetHighlightFromHoveredPoint();
+    }
+    void UpdateTargetHighlightFromHoveredPoint()
+    {
+        Target next = hoveredPoint ? hoveredPoint.GetComponentInParent<Target>() : null;
+
+        if (hoveredTarget == next) return;
+
+        if (hoveredTarget) hoveredTarget.SetExternalHighlight(false);
+
+        hoveredTarget = next;
+        if (hoveredTarget)
+        {
+            bool valid = hoveredPoint ? hoveredPoint.CanAcceptMoreConnections() : true;
+            hoveredTarget.SetExternalHighlight(true, valid);
+        }
+    }
+
+    void ClearTargetHighlight()
+    {
+        if (hoveredTarget) hoveredTarget.SetExternalHighlight(false);
+        hoveredTarget = null;
+    }
+
+    void ShowCursorIcon()
+    {
+        if (cableCursorSprite == null) return;
+        if (cursorIcon == null)
+        {
+            var go = new GameObject("CableCursorIcon");
+            cursorIcon = go.transform;
+            cursorIconSR = go.AddComponent<SpriteRenderer>();
+            cursorIconSR.sprite = cableCursorSprite;
+            cursorIconSR.color = cursorIconColor;
+            cursorIconSR.sortingOrder = cursorIconSortingOrder;
+            cursorIcon.localScale = Vector3.one * cursorIconScale;
+        }
+        cursorIcon.gameObject.SetActive(true);
+        cursorIcon.position = GetMouseWorldPos();
+    }
+    void HideCursorIcon()
+    {
+        if (cursorIcon != null)
+        {
+            Destroy(cursorIcon.gameObject);
+            cursorIcon = null;
+            cursorIconSR = null;
+        }
+    }
+    void FinishPlacementCleanup()
+    {
+        ClearTargetHighlight();
+        ClearInteractableHighlight();
+        HideCursorIcon();
     }
 
     private void HandleConnectionPointClick(ConnectionPoint point)
@@ -152,11 +254,13 @@ public class CablePlacer : MonoBehaviour
                 firstConnectionPoint.DisconnectCable(currentLine.gameObject);
                 point.DisconnectCable(currentLine.gameObject);
                 Destroy(currentLine.gameObject);
+                FinishPlacementCleanup();
                 ResetPlacement();
                 return;
             }
 
             SetConnections(firstConnectionPoint, point);
+            FinishPlacementCleanup();
             ResetPlacement();
         }
     }
@@ -173,6 +277,7 @@ public class CablePlacer : MonoBehaviour
         if (currentLine != null)
             Destroy(currentLine.gameObject);
 
+        FinishPlacementCleanup();
         ResetPlacement();
     }
 

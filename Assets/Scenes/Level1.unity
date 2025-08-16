@@ -228,6 +228,10 @@ MonoBehaviour:
   lineColor: {r: 1, g: 0.48103228, b: 0, a: 1}
   lineWidth: 0.2
   cableSortingOrder: -1
+  cableCursorSprite: {fileID: 7084060711741569152, guid: 4ee40fa0b50fe194787fecd85234f306, type: 3}
+  cursorIconScale: 0.1
+  cursorIconColor: {r: 1, g: 1, b: 1, a: 0.7058824}
+  cursorIconSortingOrder: 100
   connectableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -3031,8 +3035,8 @@ MonoBehaviour:
   tutorialPanel: {fileID: 3387995301588455629}
   tutorialImage: {fileID: 279214592669014533}
   tutorialPages:
-  - {fileID: -4425806449190991492, guid: e895175026e97414bbfa002b5b927691, type: 3}
-  - {fileID: 5545074057135662542, guid: 91fed5584ec1f314ba29942f1babe358, type: 3}
+  - {fileID: -2849013625483036478, guid: e7528e446189e9b4aa54e244f1944d55, type: 3}
+  - {fileID: 4616448239136200218, guid: 121df7c46b0ea6449a731ee2d41fdfc9, type: 3}
   loopPages: 1
   hideWhileTutorial:
   - {fileID: 3210131248438819527}
