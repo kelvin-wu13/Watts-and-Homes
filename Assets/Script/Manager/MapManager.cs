@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour
     public Sprite specialLockedSprite;
     public Sprite specialUnlockedSprite;
 
-    public int starsRequiredToUnlock = 5;
+    public int starsRequiredToUnlock = 15;
 
     public GameObject specialPopupPanel;
     public Image specialPopupImage;
@@ -284,6 +284,12 @@ public class MapManager : MonoBehaviour
     }
     public void OnClick_SpecialButton()
     {
+        if (specialPopupPanel && specialPopupPanel.activeSelf)
+        {
+            OnClick_SpecialClose();
+            return;
+        }
+
         blockerButton.gameObject.SetActive(true);
         int earned = GameProgress.GetTotalStarsEarned(totalLevels);
         if (earned < starsRequiredToUnlock) return;

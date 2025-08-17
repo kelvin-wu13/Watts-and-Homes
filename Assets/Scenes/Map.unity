@@ -886,8 +886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.75, y: 153.29}
-  m_SizeDelta: {x: 1080, y: 564.77}
+  m_AnchoredPosition: {x: 7.75, y: 105.95}
+  m_SizeDelta: {x: 1080, y: 470.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215574119
 MonoBehaviour:
@@ -1758,7 +1758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &736031667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5581,7 +5581,7 @@ MonoBehaviour:
   specialButtonImage: {fileID: 345653753}
   specialLockedSprite: {fileID: 2851729869347144417, guid: 511d2fc1abe6c684a98d3bdedf810c04, type: 3}
   specialUnlockedSprite: {fileID: 4363460842579656967, guid: 511d2fc1abe6c684a98d3bdedf810c04, type: 3}
-  starsRequiredToUnlock: 5
+  starsRequiredToUnlock: 15
   specialPopupPanel: {fileID: 898719782}
   specialPopupImage: {fileID: 1068046506}
   comicSprite: {fileID: 7135653074085587292, guid: f459279eed0920c4f9f3d06d5db59289, type: 3}
