@@ -98,6 +98,7 @@ public class DividerBox : MonoBehaviour, IPowerDataProvider
         }
 
         UpdateUIFields(distributionRatio1);
+        ForceUpdateDistribution();
     }
 
     public void ForceUpdateDistribution()
@@ -160,7 +161,21 @@ public class DividerBox : MonoBehaviour, IPowerDataProvider
         {
             return frame.GetNetPowerOutput();
         }
-        return 0;
+        if (parent is DividerBox divider)
+            return divider.GetOutputPowerFor(inputPoint);
+
+        return 0f;
+    }
+    public float GetOutputPowerFor(ConnectionPoint port)
+    {
+        UpdateTotalInputPower();
+
+        float p1 = totalPowerInput * distributionRatio1;
+        float p2 = totalPowerInput * (1f - distributionRatio1);
+
+        if (port == outputPoint1) return p1;
+        if (port == outputPoint2) return p2;
+        return 0f;
     }
     private void DistributePowerToOutput(ConnectionPoint outputPoint, float power)
     {
