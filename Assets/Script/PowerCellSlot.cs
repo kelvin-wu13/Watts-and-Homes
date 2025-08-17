@@ -84,12 +84,11 @@ public class PowerCellSlot : MonoBehaviour
         var cell = other.GetComponent<PowerCellManager>();
         if (cell == null) return;
 
-        // >>> HANYA auto-place kalau cell-nya sedang DI-DRAG oleh pemain
         if (!cell.IsDragging) return;
 
         if (!isOccupied)
         {
-            PlacePowerCell(cell);   // fungsi lama kamu
+            PlacePowerCell(cell);
         }
     }
 

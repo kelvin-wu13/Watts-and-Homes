@@ -45,10 +45,10 @@ public class PowerCellManager : MonoBehaviour
         if (GameManager.currentState != GameManager.GameState.Normal) return false;
         if (Mouse.current == null) return false;
 
-        // Saat sudah dragging, cukup tahan tombol kiri
         if (wasDragging) return Mouse.current.leftButton.isPressed;
 
-        // Mulai drag HANYA jika klik langsung di cell ini
+        if (InteractiveObject.IsPlacingItem) return false;
+
         var ray = Camera.main.ScreenPointToRay(Pointer.current.position.ReadValue());
         var hit = Physics2D.GetRayIntersection(ray);
         return hit.collider != null
@@ -60,13 +60,12 @@ public class PowerCellManager : MonoBehaviour
     {
         IsDragging = true;
 
-        // kalau sedang di slot, lepas parent tapi TETAPKAN world transform
         if (currentSlot != null)
         {
             var old = currentSlot;
             currentSlot = null;
-            old.RemovePowerCell();                 // fungsi lamamu
-            transform.SetParent(null, true);       // true = keep world pos/rot/scale
+            old.RemovePowerCell();
+            transform.SetParent(null, true);
         }
 
         var cp = GetComponent<ConnectionPoint>();
@@ -75,12 +74,10 @@ public class PowerCellManager : MonoBehaviour
 
     private void OnDrag()
     {
-        // Pindahkan cell mengikuti kursor
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         mouseWorldPos.z = 0;
         transform.position = mouseWorldPos;
 
-        // Feedback slot terdekat (punyamu sudah ada)
         ShowNearbySlotsFeedback();
     }
 
@@ -88,7 +85,6 @@ public class PowerCellManager : MonoBehaviour
     {
         IsDragging = false;
 
-        // Coba snap ke slot kosong terdekat jika cukup dekat
         float bestDist = float.MaxValue;
         PowerCellSlot best = null;
         foreach (var frame in FindObjectsByType<SolarFrame>(FindObjectsSortMode.None))
@@ -99,7 +95,7 @@ public class PowerCellManager : MonoBehaviour
             if (d < bestDist) { bestDist = d; best = slot; }
         }
         if (best != null && bestDist <= snapDistance)
-            best.PlacePowerCell(this); // parent & snap (pakai logika kamu)
+            best.PlacePowerCell(this);
 
         var cp = GetComponent<ConnectionPoint>();
         if (cp) cp.enabled = false;
@@ -119,17 +115,6 @@ public class PowerCellManager : MonoBehaviour
         }
     }
 
-    //private void ClearSlotsFeedback()
-    //{
-    //    PowerCellSlot[] allSlots = FindObjectsByType<PowerCellSlot>(FindObjectsSortMode.None);
-    //    foreach (PowerCellSlot slot in allSlots)
-    //    {
-    //        if (!slot.isOccupied)
-    //        {
-    //            slot.OnHoverExit();
-    //        }
-    //    }
-    //}
     public void SetSlot(PowerCellSlot slot)
     {
         currentSlot = slot;
@@ -139,7 +124,6 @@ public class PowerCellManager : MonoBehaviour
 
         if (slot != null)
         {
-            // simpan world-scale sebelum diparent
             Vector3 worldScale = transform.lossyScale;
 
             transform.SetParent(slot.transform, true);
@@ -148,7 +132,6 @@ public class PowerCellManager : MonoBehaviour
         }
         else
         {
-            // keluar dari slot → lepas parent, ukuran tetap
             transform.SetParent(null, true);
         }
     }

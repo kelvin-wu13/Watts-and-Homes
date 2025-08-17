@@ -1019,8 +1019,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.05, y: -1.45}
-  m_SizeDelta: {x: 20, y: 12}
+  m_AnchoredPosition: {x: -0.077, y: -1.45}
+  m_SizeDelta: {x: 42.135, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &789808119
 CanvasGroup:
@@ -1303,6 +1303,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: ed171b5f684e89e4a95aa14f3c4139f2, type: 2}
   spriteOn: {fileID: 4692149207359955260, guid: fc607a39040007f45a4801abe687ce33, type: 3}
   spriteOff: {fileID: 2944653887146285284, guid: fc607a39040007f45a4801abe687ce33, type: 3}
+  highlightColor: {r: 1, g: 1, b: 0.6, a: 1}
+  invalidHighlightColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1022073387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,8 +1763,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.05, y: -1.25}
-  m_SizeDelta: {x: 20, y: 12}
+  m_AnchoredPosition: {x: 0.045, y: -1.25}
+  m_SizeDelta: {x: 22.851, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1362774275
 CanvasGroup:
@@ -2525,6 +2527,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 27b8df542641dcb4dad3cbc73959f480, type: 2}
   spriteOn: {fileID: 8588094623472813184, guid: fc607a39040007f45a4801abe687ce33, type: 3}
   spriteOff: {fileID: 8588094623472813184, guid: fc607a39040007f45a4801abe687ce33, type: 3}
+  highlightColor: {r: 1, g: 1, b: 0.6, a: 1}
+  invalidHighlightColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &2041483949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2836,7 +2840,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2849013625483036478, guid: e7528e446189e9b4aa54e244f1944d55, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3978,7 +3982,7 @@ MonoBehaviour:
   loopPages: 1
   hideWhileTutorial:
   - {fileID: 3210131248438819527}
-  - {fileID: 0}
+  - {fileID: 1049874428}
   - {fileID: 8108651465210433245, guid: fa9b6eba7393ff24e84e5a8d77c98b4e, type: 3}
   - {fileID: 6041035917555509659, guid: 8011c97df5443374da944af6b61a2db2, type: 3}
   - {fileID: 8916152488680286940, guid: 242b2ec33b49d9f44b040e3fd5b57e91, type: 3}
@@ -4330,7 +4334,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 852, y: 0}
-  m_SizeDelta: {x: 160, y: 159.91}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3011453141590044971
 MonoBehaviour:
@@ -7350,6 +7354,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 2fb8a893c52262a47a8dd3a3608233f0, type: 2}
   spriteOn: {fileID: 7416660470128251321, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
   spriteOff: {fileID: -6577226571599536343, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  highlightColor: {r: 1, g: 1, b: 0.6, a: 1}
+  invalidHighlightColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &7706561239798499630
 GameObject:
   m_ObjectHideFlags: 0

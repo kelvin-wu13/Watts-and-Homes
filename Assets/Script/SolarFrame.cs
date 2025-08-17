@@ -9,6 +9,7 @@ public class SolarFrame : MonoBehaviour,IPowerDataProvider
     public float snapDistance = 2f;
 
     private PowerCellSlot[] slots;
+    private bool childrenRefunded = false;
 
     private void Awake()
     {
@@ -190,5 +191,21 @@ public class SolarFrame : MonoBehaviour,IPowerDataProvider
             }
         }
         return powerCells;
+    }
+    public void RefundContainedItemsToInventory()
+    {
+        if (childrenRefunded) return;
+        childrenRefunded = true;
+
+        var tags = GetComponentsInChildren<SpawnedItemTag>(includeInactive: true);
+        foreach (var tag in tags)
+        {
+            if (!tag) continue;
+            if (tag.gameObject == this.gameObject) continue;
+            if (!string.IsNullOrEmpty(tag.slotId))
+            {
+                InventoryManager.Instance?.Refund(tag.slotId);
+            }
+        }
     }
 }

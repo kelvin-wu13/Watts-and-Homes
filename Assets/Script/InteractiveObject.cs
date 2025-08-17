@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 
 public class InteractiveObject : MonoBehaviour
 {
+    public static bool IsPlacingItem { get; private set; } = false;
+
     [Header("Spawn Settings")]
     public GameObject itemPrefab;
     public string slotId;
@@ -22,30 +24,25 @@ public class InteractiveObject : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    // PANGGIL INI dari OnPointerDown (ideal) atau OnClick (masih didukung)
     public void OnPress()
     {
-        // Cek stok lebih dulu
         if (InventoryManager.Instance && !InventoryManager.Instance.CanUse(slotId))
         {
             Debug.Log($"[InteractiveObject] {slotId} stok habis.");
             return;
         }
 
-        // Reset preview lama & set owner
         if (previewInstance) Destroy(previewInstance);
         activeOwner = this;
 
-        // Buat preview
         previewInstance = Instantiate(itemPrefab);
         if (previewInstance && !previewInstance.activeSelf) previewInstance.SetActive(true);
         SetupPreviewAppearance(previewInstance);
 
-        // Posisi awal
         if (previewInstance) previewInstance.transform.position = GetMouseWorldPos();
 
-        // Jika dipanggil via OnPointerDown: tombol sudah pressed → langsung dragging
-        // Jika via OnClick: tombol sudah released → tunggu press berikutnya
+        IsPlacingItem = true;
+
         state = (Mouse.current != null && Mouse.current.leftButton.isPressed)
               ? DragState.Dragging
               : DragState.WaitingForPress;
@@ -55,7 +52,6 @@ public class InteractiveObject : MonoBehaviour
 
     private void Update()
     {
-        // Hanya owner yang boleh meng-handle
         if (activeOwner != this || previewInstance == null) return;
 
         // Batal dengan ESC / Right Click
@@ -117,6 +113,8 @@ public class InteractiveObject : MonoBehaviour
             Destroy(previewInstance);
         }
 
+        IsPlacingItem = false;
+
         // Selesai
         previewInstance = null;
         activeOwner = null;
@@ -126,6 +124,9 @@ public class InteractiveObject : MonoBehaviour
     private void CancelDrag()
     {
         if (previewInstance) Destroy(previewInstance);
+
+        IsPlacingItem = false;
+
         previewInstance = null;
         activeOwner = null;
         state = DragState.Idle;

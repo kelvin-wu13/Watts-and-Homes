@@ -242,6 +242,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: bb1a02253d81fc4468218fbf5e7bf1f0, type: 2}
   spriteOn: {fileID: 7416660470128251321, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
   spriteOff: {fileID: -6577226571599536343, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  highlightColor: {r: 1, g: 1, b: 0.6, a: 1}
+  invalidHighlightColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!212 &118018728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3508,7 +3510,7 @@ MonoBehaviour:
   loopPages: 1
   hideWhileTutorial:
   - {fileID: 3210131248438819527}
-  - {fileID: 0}
+  - {fileID: 1049874428}
   - {fileID: 8108651465210433245, guid: fa9b6eba7393ff24e84e5a8d77c98b4e, type: 3}
   - {fileID: 6041035917555509659, guid: 8011c97df5443374da944af6b61a2db2, type: 3}
   - {fileID: 8916152488680286940, guid: 242b2ec33b49d9f44b040e3fd5b57e91, type: 3}
@@ -3860,7 +3862,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 852, y: 0}
-  m_SizeDelta: {x: 160, y: 159.91}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3011453141590044971
 MonoBehaviour:
@@ -6880,6 +6882,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: ac1f29319e8b6134f91ffeb42854bfd4, type: 2}
   spriteOn: {fileID: 7416660470128251321, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
   spriteOff: {fileID: -6577226571599536343, guid: 98f126f3d8fa053449abad839d30ea6a, type: 3}
+  highlightColor: {r: 1, g: 1, b: 0.6, a: 1}
+  invalidHighlightColor: {r: 1, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &7706561239798499630
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,6 +52,9 @@ public class Interactable : MonoBehaviour
 
         if (isHovering && Mouse.current.rightButton.wasPressedThisFrame)
         {
+            var frame = GetComponent<SolarFrame>();
+            if (frame) frame.RefundContainedItemsToInventory();
+
             var tag = GetComponent<SpawnedItemTag>();
             if (tag && !string.IsNullOrEmpty(tag.slotId))
                 InventoryManager.Instance?.Refund(tag.slotId);
