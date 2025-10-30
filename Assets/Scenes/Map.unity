@@ -592,8 +592,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -35.999878, y: -265}
-  m_SizeDelta: {x: 750, y: 1000}
+  m_AnchoredPosition: {x: -36, y: -265}
+  m_SizeDelta: {x: 715, y: 1000}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &162295402
 MonoBehaviour:
@@ -1087,7 +1087,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -411}
-  m_SizeDelta: {x: 972.75, y: 219.2}
+  m_SizeDelta: {x: 1000, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &299025885
 GameObject:
@@ -1124,7 +1124,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 204, y: -265}
-  m_SizeDelta: {x: 750, y: 1000}
+  m_SizeDelta: {x: 715, y: 1000}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &299025887
 CanvasRenderer:
@@ -1505,7 +1505,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -363, y: -276}
-  m_SizeDelta: {x: 550, y: 1000}
+  m_SizeDelta: {x: 600, y: 1000}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &421764720
 CanvasRenderer:
@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8737831176614553905, guid: 264f3cb45405fd7409bbb0d27f1e2a50, type: 3}
+  m_Sprite: {fileID: -3600928602687419963, guid: 735ee59bb18625a4db8002810332636e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2587,7 +2587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015258789, y: -20}
+  m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1001499273
@@ -2610,10 +2610,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Terima kasih. Nanti saya lihat bagaimana hasilnya.
+  m_text: dwadawdasdfefafwdawadadsawdad
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2f3351a395cf8b146943fc270bfa0686, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3f95e5e461bca0f42894dbf018fe86d0, type: 2}
+  m_sharedMaterial: {fileID: 8399736029294771613, guid: 3f95e5e461bca0f42894dbf018fe86d0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2637,8 +2637,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2675,10 +2675,10 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -291.53363, y: -84.15392, z: -268.99316, w: -48.324448}
+  m_margin: {x: -392.713, y: -84.15392, z: -387.47968, w: -66.96275}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1001499274
@@ -3244,7 +3244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2799158156103191960, guid: 33dc1839a97702c4a93fd05b93c3da01, type: 3}
+  m_Sprite: {fileID: -871430680, guid: 735ee59bb18625a4db8002810332636e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3279,7 +3279,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -30, y: -276}
-  m_SizeDelta: {x: 550, y: 1000}
+  m_SizeDelta: {x: 600, y: 1000}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1116280678
 GameObject:
@@ -5854,8 +5854,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 237.1}
+  m_AnchoredPosition: {x: 0, y: 8}
+  m_SizeDelta: {x: 1000, y: 240}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1885010734
 GameObject:
@@ -6404,7 +6404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -13.999908}
+  m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074736072
@@ -6428,10 +6428,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Iya, Pak. Kami datang untuk membantu memasang panel surya kecil di rumah-rumah
-    warga.
+    warga.AWOPKDFMNaijklFNILsBFNisnfIesnfoPNESpfnI
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2f3351a395cf8b146943fc270bfa0686, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3f95e5e461bca0f42894dbf018fe86d0, type: 2}
+  m_sharedMaterial: {fileID: 8399736029294771613, guid: 3f95e5e461bca0f42894dbf018fe86d0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6455,8 +6455,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6493,10 +6493,10 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -291.53363, y: -84.15392, z: -268.99316, w: -48.324448}
+  m_margin: {x: -392.71307, y: -84.15392, z: -388.06378, w: -88.01463}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2074736073

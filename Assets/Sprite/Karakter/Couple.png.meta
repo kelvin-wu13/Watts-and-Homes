@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 264f3cb45405fd7409bbb0d27f1e2a50
+guid: 735ee59bb18625a4db8002810332636e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8737831176614553905
-    second: Char_1_2_0
+      213: -4420677669093319979
+    second: Couple_0
   - first:
-      213: 7016964481559670577
-    second: Char_1_2_1
+      213: -3600928602687419963
+    second: Couple_1
+  - first:
+      213: 8487367034389081705
+    second: Couple_2
+  - first:
+      213: 428842210812091098
+    second: Couple_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,11 +135,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Char_1_2_0
+      name: Couple_1
       rect:
         serializedVersion: 2
-        x: 1099
-        y: 151
+        x: 2578
+        y: 172
         width: 1198
         height: 1952
       alignment: 0
@@ -144,18 +150,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc65e8207dcfcb680800000000000000
-      internalID: -8737831176614553905
+      spriteID: 5c9c54fa38ee60ec0800000000000000
+      internalID: -3600928602687419963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Char_1_2_1
+      name: Couple_0
       rect:
         serializedVersion: 2
-        x: 2398
-        y: 151
+        x: 172
+        y: 172
         width: 1198
         height: 1952
       alignment: 0
@@ -164,10 +170,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 13fa5ecb404416160800000000000000
-      internalID: 7016964481559670577
+      spriteID: b5ae7efa4756e244180e6825e70449a9
+      internalID: -871430680
       vertices: []
       indices: 
       edges: []
@@ -176,7 +182,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 09654912621eb1448abd25356bedf9d7
+    spriteID: 36174377af912b54394761f318987c9f
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +192,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Char_1_2_0: -8737831176614553905
-      Char_1_2_1: 7016964481559670577
+      Couple_0: -871430680
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
