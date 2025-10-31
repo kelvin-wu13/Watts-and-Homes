@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 91fed5584ec1f314ba29942f1babe358
+guid: 7e828c93df8c78d48b11d8598c3bef4a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5545074057135662542
-    second: Tutorial2_0
+      213: -8082587347393049131
+    second: lightbulb frame 3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tutorial2_0
+      name: lightbulb frame 3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 3840
+        height: 2160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ec52ec4d97f04fc40800000000000000
-      internalID: 5545074057135662542
+      spriteID: 44d4f9e5d1ca741429108b8d0482240c
+      internalID: 324881243
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 78a0708d6a7d99944b36d86aa230d428
     internalID: 0
     vertices: []
     indices: 
@@ -159,9 +159,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":3840.0,"y":2160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Tutorial2_0: 5545074057135662542
+      lightbulb frame 3_0: 324881243
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

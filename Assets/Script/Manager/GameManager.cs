@@ -10,6 +10,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetState(GameState.Normal);
+        ShowTutorialAtStart();
+    }
+
+    private void ShowTutorialAtStart()
+    {
+        var settingsManager = FindObjectOfType<SettingsManager>();
+        if (settingsManager != null)
+        {
+            settingsManager.OpenTutorial();
+        }
     }
 
     public void StartCablePlacement()
